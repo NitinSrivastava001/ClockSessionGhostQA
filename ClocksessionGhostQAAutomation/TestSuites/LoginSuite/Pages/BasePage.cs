@@ -30,7 +30,7 @@ namespace ClocksessionGhostQAAutomation.TestSuites.LoginSuite.Pages
         {
             
 
-            BaseURL = TestExecutor.Baseurl;
+            BaseURL = GhostQAExecutor.Baseurl;
 
             driver = Browser.Driver;
             js = (IJavaScriptExecutor)driver;

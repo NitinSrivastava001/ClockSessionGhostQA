@@ -27,7 +27,7 @@ namespace ClocksessionGhostQAAutomation.Utils
 
         public static void Start(BrowserDriver driver = BrowserDriver.Chrome, bool isRunHeadless = false, WindowSize windowSize = null)
         {
-            String driverpath = TestExecutor.Driverpath;
+            String driverpath = GhostQAExecutor.Driverpath;
             switch (driver)
             {
                 case BrowserDriver.Chrome:

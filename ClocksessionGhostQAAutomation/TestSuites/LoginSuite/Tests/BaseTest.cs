@@ -16,8 +16,8 @@ namespace ClocksessionGhostQAAutomation.TestSuites.LoginSuite.Tests
     public class BaseTest
     {
         
-        public static string basePath;
-        public static string EnvironmentName = TestExecutor.environmentName;
+        public static string basePath = GhostQAExecutor.Basepath;
+        public static string EnvironmentName = GhostQAExecutor.environmentName;
         //public Authentication Credentials = new Authentication();
         public IWebDriver driver;
         private static string LoggingPath { get; set; }
@@ -29,15 +29,15 @@ namespace ClocksessionGhostQAAutomation.TestSuites.LoginSuite.Tests
         {
             _testData.TestSuiteStartDateTime = DateTime.Now.ToString("dd-MMM-yyyy HH:mm:ss.fffffffzzz");
             _testData.TestEnvironment = EnvironmentName;
-            if (TestExecutor.Basepath == "")
-            {
-                //Read from config file except to API Url
+            //if (GhostQAExecutor.Basepath == "")
+            //{
+            //    //Read from config file except to API Url
 
-            }
-            else
-            {
-                basePath = TestExecutor.Basepath;
-            }
+            //}
+            //else
+            //{
+            //    basePath = GhostQAExecutor.Basepath;
+            //}
 
         }
         
@@ -48,7 +48,7 @@ namespace ClocksessionGhostQAAutomation.TestSuites.LoginSuite.Tests
             StringBuilder logMessage = new StringBuilder();
             //_testData.TestCaseName = TestContext.CurrentContext.Test.Name;
             // Get Browser settings
-            string baseURL = TestExecutor.Baseurl;
+            string baseURL = GhostQAExecutor.Baseurl;
             _testData.TestRunName = newGuid.ToString();
             _testData.TesterName = "Nitin Srivastava";
             WindowSize browserWindowSize = new WindowSize(1280, 720);
@@ -91,10 +91,10 @@ namespace ClocksessionGhostQAAutomation.TestSuites.LoginSuite.Tests
             Browser.Driver.Dispose();
             _testData.TestSuiteEndDateTime = DateTime.Now.ToString("dd-MMM-yyyy HH:mm:ss.fffffffzzz");
             _testData.TestCaseSteps = JsonConvert.SerializeObject(_testSteps.Where(x => x.Timestamp is not null && (x.Status is not null || x.Status != string.Empty)));
-            TestExecutor.JsonData = JsonConvert.SerializeObject(_testData);
+            GhostQAExecutor.JsonData = JsonConvert.SerializeObject(_testData);
             //API to push to data 
             //  
-            string apiUrl = TestExecutor.APIpath;
+            string apiUrl = GhostQAExecutor.APIpath;
 
             // Replace this with your JSON payload
             string jsonPayload = JsonConvert.SerializeObject(_testData);

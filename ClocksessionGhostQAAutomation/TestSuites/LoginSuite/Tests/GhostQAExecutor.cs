@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClocksessionGhostQAAutomation.TestSuites.LoginSuite.Tests
 {
-    public class TestExecutor
+    public class GhostQAExecutor
     {
         private static string _browsername = "chrome";
         private static string _environmentname = "dev";
