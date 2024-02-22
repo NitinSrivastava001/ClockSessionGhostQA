@@ -15,29 +15,42 @@ namespace ClocksessionGhostQAAutomation.TestSuites.LoginSuite.Tests
     [TestFixture]
     public class BaseTest
     {
-
-        public static string basePath = TestExecutor.Basepath;
+        
+        public static string basePath;
         public static string EnvironmentName = TestExecutor.environmentName;
         //public Authentication Credentials = new Authentication();
         public IWebDriver driver;
         private static string LoggingPath { get; set; }
         public static TestData _testData = TestDataSharedInstance.testData;
         public static List<TestStepColumns> _testSteps = TestCaseStepsInstance.TestSteps;
+        Guid newGuid = Guid.NewGuid();
 
         public BaseTest()
         {
             _testData.TestSuiteStartDateTime = DateTime.Now.ToString("dd-MMM-yyyy HH:mm:ss.fffffffzzz");
             _testData.TestEnvironment = EnvironmentName;
+            if (TestExecutor.Basepath == "")
+            {
+                //Read from config file except to API Url
+
+            }
+            else
+            {
+                basePath = TestExecutor.Basepath;
+            }
 
         }
+        
 
         [SetUp]
         public void SetUp()
         {
             StringBuilder logMessage = new StringBuilder();
-            _testData.TestCaseName = TestContext.CurrentContext.Test.Name;
+            //_testData.TestCaseName = TestContext.CurrentContext.Test.Name;
             // Get Browser settings
             string baseURL = TestExecutor.Baseurl;
+            _testData.TestRunName = newGuid.ToString();
+            _testData.TesterName = "Nitin Srivastava";
             WindowSize browserWindowSize = new WindowSize(1280, 720);
             LogMessage(logMessage.ToString());
             Browser.Start(BrowserDriver.Chrome);
@@ -81,7 +94,7 @@ namespace ClocksessionGhostQAAutomation.TestSuites.LoginSuite.Tests
             TestExecutor.JsonData = JsonConvert.SerializeObject(_testData);
             //API to push to data 
             //  
-            string apiUrl = "http://65.1.72.190/api/AddInBuildTestSuite/SaveInBuiltTestSuites";
+            string apiUrl = TestExecutor.APIpath;
 
             // Replace this with your JSON payload
             string jsonPayload = JsonConvert.SerializeObject(_testData);

@@ -8,11 +8,12 @@ namespace ClocksessionGhostQAAutomation.TestSuites.LoginSuite.Tests
 {
     public class TestExecutor
     {
-        private static string _browsername = "Chrome";
+        private static string _browsername = "chrome";
         private static string _environmentname = "dev";
         private static string _baseurl = "https://mechlintech.dev.clocksession.com/app";
         private static string _basepath = "C:\\Users\\Nitin\\source\\repos\\MyersAndStauffer_GhostQA1\\MyersAndStauffer_GhostQA1\\TestSeleniumReport\\wwwroot\\";
         private static string _driverpath = "C:\\Users\\Nitin\\source\\repos\\MyersAndStauffer_GhostQA1\\MyersAndStauffer_GhostQA1\\MyersAndStaufferAutomation\\MyersAndStaufferSeleniumTests\\bin\\x64\\Debug\\net6.0";
+        private static string _ApiUrl = "http://65.1.72.190/api/AddInBuildTestSuite/SaveInBuiltTestSuites";
         public static string JsonData { get; set; }
         public static string browserName
         {
@@ -39,6 +40,12 @@ namespace ClocksessionGhostQAAutomation.TestSuites.LoginSuite.Tests
         {
             get => _driverpath;
             set => _driverpath = value;
+
+        }
+        public static string APIpath
+        {
+            get => _ApiUrl;
+            set => _ApiUrl = value;
 
         }
         public static string Testername { get; set; }
