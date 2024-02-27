@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using myersandstaufferframework;
 
 namespace ClocksessionGhostQAAutomation.TestSuites.LoginSuite.Tests
 {
@@ -24,6 +25,8 @@ namespace ClocksessionGhostQAAutomation.TestSuites.LoginSuite.Tests
         public static TestData _testData = TestDataSharedInstance.testData;
         public static List<TestStepColumns> _testSteps = TestCaseStepsInstance.TestSteps;
         Guid newGuid = Guid.NewGuid();
+        string videoPath = basePath + "video.mp4";
+        public VideoRecorder videoRecorder = new();
 
         public BaseTest()
         {
@@ -45,6 +48,9 @@ namespace ClocksessionGhostQAAutomation.TestSuites.LoginSuite.Tests
         [SetUp]
         public void SetUp()
         {
+            string videoPath = basePath+"video.mp4";
+            videoRecorder = new VideoRecorder();
+            videoRecorder.StartRecording();
             StringBuilder logMessage = new StringBuilder();
             //_testData.TestCaseName = TestContext.CurrentContext.Test.Name;
             // Get Browser settings
@@ -53,7 +59,7 @@ namespace ClocksessionGhostQAAutomation.TestSuites.LoginSuite.Tests
             _testData.TesterName = "Nitin Srivastava";
             WindowSize browserWindowSize = new WindowSize(1280, 720);
             LogMessage(logMessage.ToString());
-            Browser.Start(BrowserDriver.Chrome);
+            Browser.Start(BrowserDriver.Edge);
             driver = Browser.Driver;
             driver.Manage().Window.Maximize();
         }
@@ -86,7 +92,8 @@ namespace ClocksessionGhostQAAutomation.TestSuites.LoginSuite.Tests
 
             _testData.TestRunEndDateTime = DateTime.Now.ToString("dd-MMM-yyyy HH:mm:ss.fffffffzzz");
             _testData.TestCaseSteps = "-";
-           // VideoRecorder.EndRecording();
+            videoRecorder.StopRecording();
+
 
             Browser.Driver.Dispose();
             _testData.TestSuiteEndDateTime = DateTime.Now.ToString("dd-MMM-yyyy HH:mm:ss.fffffffzzz");
