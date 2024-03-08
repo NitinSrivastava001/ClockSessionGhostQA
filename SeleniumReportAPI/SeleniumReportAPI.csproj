@@ -83,7 +83,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\ClocksessionGhostQAAutomation\ClocksessionAutomation.csproj" />
+	  <ProjectReference Include="C:\Users\Nitin\source\repos\ClockSessionGhostQA\ClocksessionGhostQAAutomation\ClocksessionAutomation.csproj" />
 	</ItemGroup>
 
 </Project>
