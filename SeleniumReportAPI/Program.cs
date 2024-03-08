@@ -1,15 +1,9 @@
+using ClocksessionGhostQAAutomation.TestSuites.LoginSuite.Tests;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using MyersAndStaufferSeleniumTests.Arum.Mississippi.TestFile;
 using SeleniumReportAPI.DBContext;
 using SeleniumReportAPI.Helper;
 using System.Text;
@@ -94,7 +88,7 @@ builder.Services.AddSwaggerGen(option =>
     });
 });
 
-builder.Services.AddTransient<TestExecutor>();
+builder.Services.AddTransient<GhostQAExecutor>();
 builder.Services.AddSingleton<DBHelper>();
 
 var app = builder.Build();

@@ -1,7 +1,5 @@
-﻿using GitHub;
+﻿using ClocksessionGhostQAAutomation.TestSuites.LoginSuite.Tests;
 using Microsoft.IdentityModel.Tokens;
-using MyersAndStaufferSeleniumTests.Arum.Mississippi.Pages;
-using MyersAndStaufferSeleniumTests.Arum.Mississippi.TestFile;
 using Newtonsoft.Json;
 using SeleniumReportAPI.Models;
 using System.Data;
@@ -17,9 +15,9 @@ namespace SeleniumReportAPI.Helper
     public class DBHelper
     {
         private readonly IConfiguration _configuration;
-        private readonly TestExecutor _testExecutor;
+        private readonly GhostQAExecutor _testExecutor;
 
-        public DBHelper(IConfiguration configuration, TestExecutor testExecutor)
+        public DBHelper(IConfiguration configuration, GhostQAExecutor testExecutor)
         {
             _configuration = configuration;
             _testExecutor = testExecutor;

@@ -83,7 +83,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\MyersAndStaufferAutomation\MyersAndStaufferSeleniumTests\MyersAndStaufferSeleniumTests.csproj" />
+	  <ProjectReference Include="..\ClocksessionGhostQAAutomation\ClocksessionAutomation.csproj" />
 	</ItemGroup>
 
 </Project>

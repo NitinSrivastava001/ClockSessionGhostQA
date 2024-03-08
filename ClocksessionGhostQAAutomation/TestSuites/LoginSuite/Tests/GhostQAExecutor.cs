@@ -51,7 +51,7 @@ namespace ClocksessionGhostQAAutomation.TestSuites.LoginSuite.Tests
         public static string Testername { get; set; }
 
 
-        public static string ExecuteTestCases(string browsername, string EnvironmentName, string TestCaseName, string baseurl, string basePath, string driverPath, string testerName)
+        public string ExecuteTestCases(string browsername, string EnvironmentName, string TestCaseName, string baseurl, string basePath, string driverPath, string testerName)
         {
             browserName = browsername;
             environmentName = EnvironmentName;
