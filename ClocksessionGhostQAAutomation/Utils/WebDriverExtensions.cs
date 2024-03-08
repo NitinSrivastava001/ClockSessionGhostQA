@@ -40,7 +40,7 @@ namespace MyersAndStaufferSeleniumTests.Utils
         public static void WaitforTextToContain(this IWebDriver driver, string match, Func<By> lazyElementGetter, int timeoutInSeconds = 20)
             => driver.WaitUntilWebElementCondition(() => driver.FindElement(lazyElementGetter()), e => e.Text.Contains(match), timeoutInSeconds);
 
-       
+
         /// <summary>
         /// Wait for element to be clickable, then perform the click action
         /// </summary>
