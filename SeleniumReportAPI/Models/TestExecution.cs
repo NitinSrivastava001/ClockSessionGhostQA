@@ -6,6 +6,7 @@ namespace SeleniumReportAPI.Models
     {
         [Key]
         public int ExecutionId { get; set; }
+
         public string TestSuiteName { get; set; }
         public string TestRunName { get; set; }
         public string TestCaseName { get; set; }

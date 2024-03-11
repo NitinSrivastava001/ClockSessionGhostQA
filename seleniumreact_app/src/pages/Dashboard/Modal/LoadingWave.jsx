@@ -18,7 +18,7 @@ const LoadingWave = ({ open, onClose, suiteName }) => {
         </Box>
         <Box>
         <img src={ghostLogo} alt="" height='200px' width='500px'/>
-        </Box> 
+        </Box>
       </Box>
     </Box>
     </Modal>

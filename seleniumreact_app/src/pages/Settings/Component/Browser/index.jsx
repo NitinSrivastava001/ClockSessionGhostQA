@@ -20,12 +20,12 @@ export default function Browser() {
   useEffect(()=>{
     dispatch(GetBrowser())
   },[])
-  
+
   const handleAddBrowser = () => {
     setShowAddNewBrowser(true);
     setaddOredit("Add");
   };
- 
+
   const handleEditBrowser = (row) => {
     setBrowserToEdit(row)
     setaddOredit("Edit");
@@ -36,7 +36,6 @@ export default function Browser() {
     setShowAddNewBrowser(false);
     setBrowserToEdit(null)
   };
-
 
   const filteredData = browserList?.filter((data) =>
     data?.BrowserName?.toLowerCase()?.includes(searchTerm?.toLowerCase())

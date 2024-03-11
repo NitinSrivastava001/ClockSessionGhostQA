@@ -1,31 +1,28 @@
 ﻿using ClocksessionGhostQAAutomation.Utils;
+using myersandstaufferframework;
 using MyersAndStaufferSeleniumTests.Utils;
 using Newtonsoft.Json;
-using NUnit.Framework.Interfaces;
 using NUnit.Framework;
+using NUnit.Framework.Interfaces;
 using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using myersandstaufferframework;
 
 namespace ClocksessionGhostQAAutomation.TestSuites.LoginSuite.Tests
 {
     [TestFixture]
     public class BaseTest
     {
-        
         public static string basePath = GhostQAExecutor.Basepath;
         public static string EnvironmentName = GhostQAExecutor.environmentName;
+
         //public Authentication Credentials = new Authentication();
         public IWebDriver driver;
+
         private static string LoggingPath { get; set; }
         public static TestData _testData = TestDataSharedInstance.testData;
         public static List<TestStepColumns> _testSteps = TestCaseStepsInstance.TestSteps;
-        Guid newGuid = Guid.NewGuid();
-        string videoPath = basePath + "video.mp4";
+        private Guid newGuid = Guid.NewGuid();
+        private string videoPath = basePath + "video.mp4";
         public VideoRecorder videoRecorder = new();
 
         public BaseTest()
@@ -41,14 +38,12 @@ namespace ClocksessionGhostQAAutomation.TestSuites.LoginSuite.Tests
             //{
             //    basePath = GhostQAExecutor.Basepath;
             //}
-
         }
-        
 
         [SetUp]
         public void SetUp()
         {
-            string videoPath = basePath+"video.mp4";
+            string videoPath = basePath + "video.mp4";
             videoRecorder = new VideoRecorder();
             videoRecorder.StartRecording();
             StringBuilder logMessage = new StringBuilder();
@@ -81,7 +76,6 @@ namespace ClocksessionGhostQAAutomation.TestSuites.LoginSuite.Tests
             else if (status == TestStatus.Passed.ToString())
             {
                 _testSteps.Add(new TestStepColumns { Status = "Failed", Timestamp = DateTime.Now.ToString("dd-MMM-yyyy HH:mm:ss.fffffffzzz"), Details = "Test Passed" });
-
             }
 
             if (status == TestStatus.Failed.ToString())
@@ -97,8 +91,8 @@ namespace ClocksessionGhostQAAutomation.TestSuites.LoginSuite.Tests
             _testData.TestSuiteEndDateTime = DateTime.Now.ToString("dd-MMM-yyyy HH:mm:ss.fffffffzzz");
             _testData.TestCaseSteps = JsonConvert.SerializeObject(_testSteps.Where(x => x.Timestamp is not null && (x.Status is not null || x.Status != string.Empty)));
             GhostQAExecutor.JsonData = JsonConvert.SerializeObject(_testData);
-            //API to push to data 
-            //  
+            //API to push to data
+            //
             string apiUrl = GhostQAExecutor.APIpath;
 
             // Replace this with your JSON payload
@@ -114,8 +108,6 @@ namespace ClocksessionGhostQAAutomation.TestSuites.LoginSuite.Tests
             {
                 Console.WriteLine(ex.Message);
             }
-
-
         }
 
         public static void ScreenShot(string FailureMessage, string fileName = null, bool hasTimeStamp = false)
@@ -128,7 +120,6 @@ namespace ClocksessionGhostQAAutomation.TestSuites.LoginSuite.Tests
             ss.SaveAsFile(screenshotFile);
             TestContext.AddTestAttachment(screenshotFile, fileName + "Screenshot");
             WriteToLogfile("Error screenshot: " + screenshotFile);
-
 
             var FailureSSPath = Path.Combine(basePath, "FailureScreenShots", DateTime.Now.ToString("MMMM_dd_yyyy"));
             if (!Directory.Exists(FailureSSPath))
@@ -153,8 +144,6 @@ namespace ClocksessionGhostQAAutomation.TestSuites.LoginSuite.Tests
                 .Contains(partialUrl.ToLower());
         }
 
-        
-
         public static void WriteToLogfile(string logInstanceMessage = "", string TestName = "")
         {
             if (string.IsNullOrEmpty(LoggingPath))
@@ -172,6 +161,7 @@ namespace ClocksessionGhostQAAutomation.TestSuites.LoginSuite.Tests
                 File.WriteAllText(LoggingPath, logInstanceMessage + Environment.NewLine);
             }
         }
+
         public static void AttatchLogToTest()
         {
             if (File.Exists(LoggingPath))

@@ -1,4 +1,3 @@
-
 import { makeStyles } from "@material-ui/core/styles";
 import React from 'react';
 
@@ -10,11 +9,11 @@ const useStyles = makeStyles((theme) => ({
     height: '100vh',
   },
   customCircularProgress: {
-    border: `3px solid #654DF7`, 
+    border: `3px solid #654DF7`,
     borderTop: '3px solid transparent',
     borderRadius: '50%',
-    width: '50px', 
-    height: '50px', 
+    width: '50px',
+    height: '50px',
     animation: '$spin 1s linear infinite',
   },
   '@keyframes spin': {

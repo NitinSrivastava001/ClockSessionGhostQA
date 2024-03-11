@@ -27,7 +27,6 @@ import {
 } from "../../redux/actions/seleniumAction";
 import LoadingWave from "../Dashboard/Modal/LoadingWave";
 
-
 export default function AddTestSuite() {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -81,7 +80,7 @@ export default function AddTestSuite() {
   console.log('app ',app)
   setSelectedApplication(app)
   }
-  
+
   const getTestcaseNameOnly = ()=>{
     let testCaseArrName = []
     selectedRows.map((testCase) => testCaseArrName.push(testCase.TestCaseName))
@@ -94,7 +93,6 @@ export default function AddTestSuite() {
     setopenLoadingModal(false)
     if(status === 'pass')
     navigate('/')
-
   }
   const handleSubmit = (action) => {
     const testCaseNames= getTestcaseNameOnly()
@@ -177,7 +175,6 @@ export default function AddTestSuite() {
     data?.TestCaseName?.toLowerCase()?.includes(searchTerm?.toLowerCase())
   );
 
-  
   const selectStyle={
     container: (provided) => ({
       ...provided,
@@ -216,7 +213,7 @@ export default function AddTestSuite() {
         color: '#654DF7', // Change the color on hover if desired
       },
     }),
-  } 
+  }
   return (
     <>
       <div className={classes.main}>
@@ -543,10 +540,6 @@ export default function AddTestSuite() {
                             </FormControl>
                           </Grid>
                         </Grid>
-
-                        
-
-                        
 
                         {/* Row 6: Browser Dropdown */}
                         {/* <Grid item>

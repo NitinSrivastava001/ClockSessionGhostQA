@@ -2,12 +2,7 @@
 using ClocksessionGhostQAAutomation.Utils;
 using MyersAndStaufferSeleniumTests.Utils;
 using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace ClocksessionGhostQAAutomation.TestSuites.LoginSuite.Pages
 {
@@ -18,7 +13,6 @@ namespace ClocksessionGhostQAAutomation.TestSuites.LoginSuite.Pages
 
         public virtual string PageURL { get; set; } = "/";
 
-
         public IWebDriver driver;
         IWebElement element = null;
 
@@ -28,8 +22,6 @@ namespace ClocksessionGhostQAAutomation.TestSuites.LoginSuite.Pages
 
         public BasePage(bool skipLoad = false)
         {
-            
-
             BaseURL = GhostQAExecutor.Baseurl;
 
             driver = Browser.Driver;
@@ -57,9 +49,6 @@ namespace ClocksessionGhostQAAutomation.TestSuites.LoginSuite.Pages
             string messageWithClass = $"[{GetType().Name}] {message}";
             WebDriverExtensions.LogMessage(messageWithClass);
         }
-
-          
-        
 
         public static void WaitSeconds(int seconds)
         {
@@ -91,7 +80,6 @@ namespace ClocksessionGhostQAAutomation.TestSuites.LoginSuite.Pages
             int randomInt = randomGenerator.Next(10000);
             string email = username + randomInt + "@gmail.com";
             return email;
-
         }
     }
 }

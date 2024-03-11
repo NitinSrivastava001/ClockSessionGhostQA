@@ -40,7 +40,7 @@ export default function Application() {
   const filteredData = applicationList?.filter((data) =>
     data?.ApplicationName?.toLowerCase()?.includes(searchTerm?.toLowerCase())
   );
-  
+
   return (
     <>
       {showAddNewApplication ? (

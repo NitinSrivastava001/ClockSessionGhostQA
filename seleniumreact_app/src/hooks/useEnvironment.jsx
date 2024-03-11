@@ -4,7 +4,6 @@ import { useSelector ,useDispatch} from "react-redux";
 import { useState,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-
 export default function  useEnvironment ()  {
     const dispatch=useDispatch();
     const navigate=useNavigate();
@@ -14,8 +13,6 @@ export default function  useEnvironment ()  {
     const [editEnvironmentData, setEditEnvironmentData] = useState(null);
     useEffect(() => {
         dispatch(GetEnvironment());
-        
-        
       }, []);
 
       const { environementList} =useSelector((state) => state.selenium);
@@ -25,17 +22,15 @@ export default function  useEnvironment ()  {
         // navigate("/setting/add-environment");
         console.log("Adding Environment...");
       };
-    
+
       const handleEditEnvironment = (rowData) => {
         setEditEnvironmentData(rowData);
         setShowEditNewEnvironment(true);
         console.log("editdate",editEnvironmentData);
         // navigate("/setting/edit-environment", { state: { editEnvironmentData: rowData } });
         console.log("editdata",editEnvironmentData);
-    
-    
       };
-    
+
       const handleBackFromAddNew = () => {
         setShowAddNewEnvironment(false);
         setShowEditNewEnvironment(false);

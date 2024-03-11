@@ -25,7 +25,6 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => options.S
     .AddEntityFrameworkStores<AppDBContext>()
     .AddDefaultTokenProviders();
 
-
 // Add services to the container.
 builder.Services.AddControllers()
     .AddNewtonsoftJson(options =>

@@ -119,7 +119,6 @@ export default function EditTestSuite() {
     setopenLoadingModal(false)
     if(status === 'pass')
     navigate('/')
-
   }
   const handleSubmit = (action) => {
     const testCaseNames = getTestcaseNameOnly();
@@ -168,7 +167,7 @@ export default function EditTestSuite() {
     }
     // Update error state
     setError(error);
-    
+
     // Check if there are any errors
     if (Object.keys(error).length === 0) {
       // Proceed with form submission
@@ -592,8 +591,6 @@ export default function EditTestSuite() {
                             </FormControl>
                           </Grid>
                         </Grid>
-
-                        
 
                         {/* Row 6: Browser Dropdown */}
                         {/* <Grid item>

@@ -1,7 +1,6 @@
 ﻿using ClocksessionGhostQAAutomation.TestSuites.LoginSuite.Tests;
 using Newtonsoft.Json;
 
-
 namespace ClocksessionGhostQAAutomation.Utils
 {
     public static class ReadFiles
@@ -55,7 +54,6 @@ namespace ClocksessionGhostQAAutomation.Utils
             if (File.Exists(jsonFileIn))
             {
                 jsonFile = JsonConvert.DeserializeObject(File.ReadAllText(jsonFileIn));
-
             }
             else
             {

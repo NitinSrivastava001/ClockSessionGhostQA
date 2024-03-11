@@ -1,11 +1,9 @@
-﻿
-
-using ClocksessionGhostQAAutomation.TestSuites.LoginSuite.Tests;
+﻿using ClocksessionGhostQAAutomation.TestSuites.LoginSuite.Tests;
 using System.Diagnostics;
 
 namespace myersandstaufferframework
 {
-    public class VideoRecorder 
+    public class VideoRecorder
     {
         private Process ffmpegProcess;
         public static string basePath = GhostQAExecutor.Basepath;
@@ -16,7 +14,7 @@ namespace myersandstaufferframework
             var date = DateTime.Now.ToString("dd-MM-yyyy");
             var time = DateTime.Now.ToString("HH-mm-ss");
 
-            String outputFile =  GhostQAExecutor.Basepath+date+"\\"+time+".mp4";
+            String outputFile = GhostQAExecutor.Basepath + date + "\\" + time + ".mp4";
             String ffmpegPath = @"C:\ffmpeg-6.1.1-essentials_build\bin\ffmpeg.exe";
             // Example FFmpeg command to start recording
             string command = $"{ffmpegPath} -f gdigrab -framerate 30 -i desktop -c:v libx264rgb -preset ultrafast -qp 0 -f mp4 E:\\GhostQACode\\output1.mp4";
@@ -50,7 +48,6 @@ namespace myersandstaufferframework
                 process.WaitForExit();
             }
             Console.WriteLine("Recording Stopped...");
-
         }
     }
 }

@@ -37,7 +37,7 @@ export default function Functional() {
                     </Link>
                 </Grid>
             </Grid>
-            
+
             <div style={{ paddingTop: '30px' }}>
                 <Outlet />
             </div>

@@ -8,7 +8,6 @@ import TableRow from "@mui/material/TableRow";
 import Checkbox from "@mui/material/Checkbox";
 import { useTableStyles, StyledTableCell } from "./styles";
 
-
 export function TestCaseTable({
   rows,
   selectedRows,

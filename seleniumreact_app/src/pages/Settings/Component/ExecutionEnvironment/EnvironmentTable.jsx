@@ -11,7 +11,6 @@ import Tooltip from "@mui/material/Tooltip";
 import DeleteModal from "../Modal/DeleteModal";
 export function EnvironmentTable({ rows,handleEditEnvironment}) {
   const classes = useTableStyles();
-  
 
   const [openDelModal, setopenDelModal] = useState(false)
   const [item, setitem] = useState(null)
@@ -23,7 +22,6 @@ export function EnvironmentTable({ rows,handleEditEnvironment}) {
     setitem(row)
   };
 
-  
   return (
     <>
     <DeleteModal
@@ -91,7 +89,7 @@ export function EnvironmentTable({ rows,handleEditEnvironment}) {
                 />
               </StyledTableCell>
             </TableRow>
-            
+
           ))}
         </TableBody>
       </Table>

@@ -39,7 +39,7 @@ namespace SeleniumReportAPI.Controllers
         }
 
         /// <summary>
-        ///  Update Root Relation 
+        ///  Update Root Relation
         /// </summary>
         /// <param Id="Id"></param>
         /// /// <param Name="Name"></param>
@@ -61,6 +61,5 @@ namespace SeleniumReportAPI.Controllers
         {
             return Ok(await _helper.DeleteProjectData(model));
         }
-
     }
 }

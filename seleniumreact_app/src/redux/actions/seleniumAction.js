@@ -105,7 +105,6 @@ export const GetTestCaseDetails = (data) => {
 };
 
 export const GetTestCaseStepsDetails = (data) => {
-
     return async (dispatch) => {
         try {
             const response = await axios.get(
@@ -125,7 +124,6 @@ export const GetTestCaseStepsDetails = (data) => {
 };
 
 export const GetApplication = () => {
- 
   return async (dispatch) => {
     try {
       const response = await axios.get(
@@ -145,7 +143,6 @@ export const GetApplication = () => {
 };
 
 export const GetEnvironment = () => {
-
     return async (dispatch) => {
         try {
             const response = await axios.get(
@@ -164,7 +161,6 @@ export const GetEnvironment = () => {
 };
 
 export const GetBrowser = () => {
-
     return async (dispatch) => {
         try {
             const response = await axios.get(
@@ -183,7 +179,6 @@ export const GetBrowser = () => {
 };
 
 export const GetTestCases = () => {
- 
   return async (dispatch) => {
     try {
       const response = await axios.get(
@@ -214,11 +209,11 @@ export const AddUpdateTestSuites = (data,action,handleLoading)=>{
         handleLoading('pass')
         toast.info('Successfully saved', {
           style: {
-            background: 'rgb(101, 77, 247)', 
-            color: 'rgb(255, 255, 255)', 
+            background: 'rgb(101, 77, 247)',
+            color: 'rgb(255, 255, 255)',
           },
         });
-    } 
+    }
     console.log("saved ",res)
     }catch (error) {
       handleLoading('error')
@@ -242,20 +237,18 @@ export const Getsuitebyname = (suitName)=>{
     //   if (res.status === 200) {
     //     toast.info('Successfully saved', {
     //       style: {
-    //         background: 'rgb(101, 77, 247)', 
-    //         color: 'rgb(255, 255, 255)', 
+    //         background: 'rgb(101, 77, 247)',
+    //         color: 'rgb(255, 255, 255)',
     //       },
     //     });
-    // } 
+    // }
     }catch (error) {
       console.log("error getting suite by name ",error);
     }
   }
 }
 
-
 export const DeleteTestSuite = (suiteName)=>{
-  
   return async (dispatch)=>{
     try {
       const res = await axios.post(
@@ -265,11 +258,11 @@ export const DeleteTestSuite = (suiteName)=>{
       if (res.status === 200) {
         toast.info('Successfully deleted', {
           style: {
-            background: 'rgb(101, 77, 247)', 
-            color: 'rgb(255, 255, 255)', 
+            background: 'rgb(101, 77, 247)',
+            color: 'rgb(255, 255, 255)',
           },
         });
-    } 
+    }
     console.log("deleted ",res)
     }catch (error) {
       console.log("error deleting ",error);

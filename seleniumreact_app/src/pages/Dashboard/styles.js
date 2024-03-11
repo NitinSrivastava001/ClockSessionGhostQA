@@ -21,8 +21,8 @@ export const useStyles = makeStyles({
         marginRight: "20px",
         marginLeft: "20px",
         cursor: "pointer",
-        '&:hover':{
-            border:'2px solid rgb(101, 77, 247)'
+        '&:hover': {
+            border: '2px solid rgb(101, 77, 247)'
         }
     },
     paperActive: {
@@ -34,8 +34,8 @@ export const useStyles = makeStyles({
         cursor: "pointer",
         backgroundColor: 'rgb(101, 77, 247)'
     },
-    activeColor:{
-        color:'white',
+    activeColor: {
+        color: 'white',
     },
     infoContainer: {
         display: "flex",

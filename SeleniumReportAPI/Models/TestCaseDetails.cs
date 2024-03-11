@@ -7,6 +7,7 @@ namespace SeleniumReportAPI.Models
     {
         [Key]
         public int TestCaseDetailsId { get; set; }
+
         public int RootId { get; set; }
 
         [Required(ErrorMessage = "TestCaseName Name is required."), Column("TestCaseName", TypeName = "varchar(100)")]

@@ -3,10 +3,6 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Text;
 
 namespace MyersAndStaufferSeleniumTests.Utils
@@ -23,6 +19,7 @@ namespace MyersAndStaufferSeleniumTests.Utils
             TestContext.Out.WriteLine(message);
 #endif
         }
+
         /// <summary>
         /// Finds an element on a page when it becomes available
         /// </summary>
@@ -39,7 +36,6 @@ namespace MyersAndStaufferSeleniumTests.Utils
 
         public static void WaitforTextToContain(this IWebDriver driver, string match, Func<By> lazyElementGetter, int timeoutInSeconds = 20)
             => driver.WaitUntilWebElementCondition(() => driver.FindElement(lazyElementGetter()), e => e.Text.Contains(match), timeoutInSeconds);
-
 
         /// <summary>
         /// Wait for element to be clickable, then perform the click action
@@ -112,7 +108,7 @@ namespace MyersAndStaufferSeleniumTests.Utils
         /// <param name="timeoutInSeconds">The timeout</param>
         /// <returns>bool if its displayed within the timeout period</returns>
         /// <remarks>
-        /// This function does not require the element to exist yet in the calling page - so no 
+        /// This function does not require the element to exist yet in the calling page - so no
         /// need for a try/catch block and additional logic around your call.
         /// </remarks>
         public static void WaitUntilElementIsDisplayed(this IWebDriver driver, Func<IWebElement> lazyElementGetter, int timeoutInSeconds = 5)
@@ -122,7 +118,7 @@ namespace MyersAndStaufferSeleniumTests.Utils
           => driver.WaitUntilWebElementCondition(lazyElementGetter, e => e.IsElementVisibleAndEnabled(), timeoutInSeconds);
 
         /// <summary>
-        /// Function to handle waiting for an element and an arbitrary element condition 
+        /// Function to handle waiting for an element and an arbitrary element condition
         /// </summary>
         /// <param name="driver">WebDriver instance</param>
         /// <param name="lazyElementGetter">A function that returns the element to test</param>
@@ -187,6 +183,7 @@ namespace MyersAndStaufferSeleniumTests.Utils
                 }
             }
         }
+
         /// <summary>
         /// this method is used to select the values from dropdown without select class
         /// </summary>
@@ -252,7 +249,6 @@ namespace MyersAndStaufferSeleniumTests.Utils
             Actions action = new Actions(driver);
             action.MoveToElement(el).Click().Build().Perform();
         }
-
 
         public static void ActionDoubleClick(this IWebDriver driver, IWebElement el)
         {

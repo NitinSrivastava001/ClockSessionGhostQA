@@ -1054,7 +1054,6 @@ namespace SeleniumReportAPI.Helper
                 status = "Success",
                 message = result
             };
-
         }
 
         public async Task<object> AcceptInvitation(string Email)
@@ -1063,7 +1062,6 @@ namespace SeleniumReportAPI.Helper
             {
                 return new { message = "Invalid email address format." };
             }
-
 
             ApplicationUser user = new()
             {
@@ -1121,6 +1119,7 @@ namespace SeleniumReportAPI.Helper
                 ? IdentityResult.Success
                 : IdentityResult.Failed(new IdentityError { Description = "Failed to change password." });
         }
+
         internal async Task<string> GetUserDetails()
         {
             string UsersListJson = string.Empty;
@@ -1307,6 +1306,7 @@ namespace SeleniumReportAPI.Helper
             }
             return result;
         }
+
         internal async Task<string> GetTestStepsDetails()
         {
             string result = string.Empty;
@@ -1370,6 +1370,7 @@ namespace SeleniumReportAPI.Helper
             }
             return result;
         }
+
         internal async Task<string> AddTestCaseDetails(TestCaseDetails model)
         {
             string result = string.Empty;
@@ -1402,6 +1403,7 @@ namespace SeleniumReportAPI.Helper
             }
             return result;
         }
+
         internal async Task<string> AddTestStepsDetails(Dto_AddTestStepsJson AddStepsJson)
         {
             string result = string.Empty;
@@ -1432,6 +1434,7 @@ namespace SeleniumReportAPI.Helper
             }
             return result;
         }
+
         internal async Task<string> UpdateRootRelation(RootRelation model)
         {
             string result = string.Empty;
@@ -1463,6 +1466,7 @@ namespace SeleniumReportAPI.Helper
             }
             return result;
         }
+
         internal async Task<string> GetTestCaseDetailsByRootId(int RootId)
         {
             string result = string.Empty;
@@ -1493,6 +1497,7 @@ namespace SeleniumReportAPI.Helper
             }
             return result;
         }
+
         internal async Task<string> GetTestStepsDetailsByTestStepsId(int TestStepsId)
         {
             string result = string.Empty;
@@ -1555,6 +1560,7 @@ namespace SeleniumReportAPI.Helper
             }
             return result;
         }
+
         internal async Task<string> GetExcutedByRootId(int RootId)
         {
             string result = string.Empty;
@@ -1647,6 +1653,7 @@ namespace SeleniumReportAPI.Helper
             }
             return result;
         }
+
         internal async Task<string> UpdateProjectData(ProjectRootRelation model)
         {
             string result = string.Empty;
@@ -1678,6 +1685,7 @@ namespace SeleniumReportAPI.Helper
             }
             return result;
         }
+
         internal async Task<string> DeleteProjectData(ProjectRootRelation model)
         {
             string result = string.Empty;

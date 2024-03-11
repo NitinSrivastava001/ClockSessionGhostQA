@@ -12,7 +12,6 @@ export const useStyles = makeStyles((theme) => ({
         fontSize: "14px",
         lineHeight: "21px",
         padding: "10px 22px",
-        
     },
     button: {
         height: "40px",

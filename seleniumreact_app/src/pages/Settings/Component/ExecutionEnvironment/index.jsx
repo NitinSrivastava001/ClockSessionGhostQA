@@ -8,8 +8,6 @@ import AddNewEnvironment from "./AddNewEnvironment";
 import EditNewEnvironment from "./EditNewEnvironment";
 import useEnvironment from "../../../../hooks/useEnvironment";
 
-
-
 export default function ExecutionEnvironment() {
     const{
       searchTerm,
@@ -23,9 +21,7 @@ export default function ExecutionEnvironment() {
        environementList
     }=useEnvironment();
   const classes = useStyles();
-  
-  
-  
+
   console.log("listenv",environementList);
   const filteredData = environementList
   ? environementList.filter((data) =>

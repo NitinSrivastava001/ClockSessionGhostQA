@@ -143,7 +143,7 @@ export default function MiniDrawer() {
                                                 placement === "bottom" ? "center top" : "center bottom",
                                         }}
                                     >
-                                        <Paper 
+                                        <Paper
                                             onMouseOver={handleMouseOver}
                                             onMouseOut={handleMouseOut}>
                                         <ClickAwayListener onClickAway={() => setShowMenu(false)}>

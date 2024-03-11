@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace ClocksessionGhostQAAutomation.Utils
+﻿namespace ClocksessionGhostQAAutomation.Utils
 {
     public class TestData
     {
@@ -18,7 +16,7 @@ namespace ClocksessionGhostQAAutomation.Utils
         public string TestEnvironment { get; set; }
 
         //public string TestRunName {  get; set; }
-        //public string TestFeature { get; set; } 
+        //public string TestFeature { get; set; }
     }
 
     public class TestStepColumns

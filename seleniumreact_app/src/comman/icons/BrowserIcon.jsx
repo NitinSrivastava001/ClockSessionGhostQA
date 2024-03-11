@@ -20,4 +20,3 @@ export const BrowserIcon = ({ isActive, color }) => {
     </div>
   );
 };
-

@@ -13,7 +13,6 @@ import {
 import { useDispatch } from "react-redux";
 import { AddUpdateBrowser } from "../../../../redux/actions/settingAction";
 
-
 export default function AddNewBrowser({ onBack,addOredit,browserToEdit,setBrowserToEdit }) {
   const classes = useStyles();
   const dispatch = useDispatch()
@@ -24,7 +23,7 @@ export default function AddNewBrowser({ onBack,addOredit,browserToEdit,setBrowse
   const [Error, setError] = useState({
     BrowserNameErrMsg: ""
   });
-  
+
   const handleSubmit = () => {
     let payload = {
       "BrowserId": browserToEdit?browserToEdit.BrowserId:0,
@@ -33,7 +32,6 @@ export default function AddNewBrowser({ onBack,addOredit,browserToEdit,setBrowse
     let error = {};
     if (!formData.BrowserName.trim()) {
       error.BrowserNameErrMsg = "browser Name is required";
-      
     }
     // Update error state
     setError(error);
@@ -142,7 +140,7 @@ export default function AddNewBrowser({ onBack,addOredit,browserToEdit,setBrowse
               </Grid>
             </Grid>
           </Grid>
-          
+
         </Card>
       </Grid>
 

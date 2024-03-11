@@ -1,10 +1,5 @@
 ﻿using MyersAndStaufferSeleniumTests.Utils;
 using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ClocksessionGhostQAAutomation.TestSuites.LoginSuite.Pages
 {
@@ -16,6 +11,7 @@ namespace ClocksessionGhostQAAutomation.TestSuites.LoginSuite.Pages
 
         //public IWebElement Login => driver.FindElementWhenVisible(() => By.XPath("//a[contains(text(),'Login')]"));
         public IWebElement EmailInput => driver.FindElementWhenVisible(() => By.XPath("//input[@name='email']"));
+
         public IWebElement PasswordInput => driver.FindElement(By.XPath("//input[@name='password']"));
 
         public IWebElement LogInButton => driver.FindElement(By.XPath("//button[contains(text(),'LOGIN')]"));
@@ -25,12 +21,10 @@ namespace ClocksessionGhostQAAutomation.TestSuites.LoginSuite.Pages
         public void WaitForPageLoad()
         {
             driver.WaitUntilElementIsDisplayed(() => EmailInput, timeoutInSeconds: 120);
-
         }
 
         public void ClickonLogin()
         {
-
             EmailInput.Click();
         }
 
@@ -60,8 +54,6 @@ namespace ClocksessionGhostQAAutomation.TestSuites.LoginSuite.Pages
         {
             LogInButton.Click();
         }
-
-       
 
         public bool LoginSuccess()
         {
