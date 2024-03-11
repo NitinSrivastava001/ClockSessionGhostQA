@@ -991,7 +991,7 @@ namespace SeleniumReportAPI.Helper
                                   <p>Dear [" + toEmail.ToUpper() + @"],</p>
                                   <p>We are thrilled to invite you to join Ghost-QA Plateform! 🌟</p>
                                   <p>To accept your invitation and dive into the excitement, simply click the button below:</p>
-                                  <p><a href=""http://codearrest.dyndns.org:3009/AcceptInvitation/" + toEmail + @""" style=""background-color: #654DF7; border: none; color: white; padding: 15px 25px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer; border-radius: 8px;"">View Invitation</a></p>
+                                  <p><a href=""http://codearrest.dyndns.org:3008/AcceptInvitation/" + toEmail + @""" style=""background-color: #654DF7; border: none; color: white; padding: 15px 25px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer; border-radius: 8px;"">View Invitation</a></p>
                                 </td>
                               </tr>
                             </table>
@@ -1018,7 +1018,7 @@ namespace SeleniumReportAPI.Helper
                                   <p> Thank you for accepting invitation here is your temprory password:</p>
                                   <em><b> Password: </b> Test@123 </em>
                                   <p> If you want to change your password follow below link </p>
-                                  <p><a href=""http://codearrest.dyndns.org:3009/ChangePassword/" + toEmail + @""" style=""background-color: #654DF7; border: none; color: white; padding: 15px 25px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer; border-radius: 8px;"">Change Password</a></p>
+                                  <p><a href=""http://codearrest.dyndns.org:3008/ChangePassword/" + toEmail + @""" style=""background-color: #654DF7; border: none; color: white; padding: 15px 25px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer; border-radius: 8px;"">Change Password</a></p>
                                 </td>
                               </tr>
                             </table>
