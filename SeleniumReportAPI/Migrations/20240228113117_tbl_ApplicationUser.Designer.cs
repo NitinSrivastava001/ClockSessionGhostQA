@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SeleniumReportAPI.DBContext;
 
@@ -11,9 +12,10 @@ using SeleniumReportAPI.DBContext;
 namespace SeleniumReportAPI.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    partial class AppDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240228113117_tbl_ApplicationUser")]
+    partial class tbl_ApplicationUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -72,6 +74,77 @@ namespace SeleniumReportAPI.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetRoleClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -174,82 +247,6 @@ namespace SeleniumReportAPI.Migrations
                     b.ToTable("tbl_Applications");
                 });
 
-            modelBuilder.Entity("SeleniumReportAPI.Models.ApplicationUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("FullName")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<bool?>("IsDisabled")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("OrganizationName")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.ToTable("AspNetUsers", (string)null);
-                });
-
             modelBuilder.Entity("SeleniumReportAPI.Models.Browsers", b =>
                 {
                     b.Property<int>("BrowserId")
@@ -323,79 +320,6 @@ namespace SeleniumReportAPI.Migrations
                     b.ToTable("tbl_Environments");
                 });
 
-            modelBuilder.Entity("SeleniumReportAPI.Models.InternalTestExecution", b =>
-                {
-                    b.Property<string>("EndDateTime")
-                        .HasColumnType("VARCHAR(50)")
-                        .HasColumnName("EndDateTime");
-
-                    b.Property<string>("StartDateTime")
-                        .HasColumnType("VARCHAR(50)")
-                        .HasColumnName("StartDateTime");
-
-                    b.Property<string>("Status")
-                        .HasColumnType("VARCHAR(10)")
-                        .HasColumnName("Status");
-
-                    b.Property<string>("TestCase")
-                        .HasColumnType("VARCHAR(100)")
-                        .HasColumnName("TestCase");
-
-                    b.Property<string>("TestRun")
-                        .HasColumnType("VARCHAR(100)")
-                        .HasColumnName("TestCaseName");
-
-                    b.Property<string>("TestStepJson")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TestSuite")
-                        .HasColumnType("VARCHAR(100)")
-                        .HasColumnName("TestSuite");
-
-                    b.ToTable("tbl_InternalTestExecutions");
-                });
-
-            modelBuilder.Entity("SeleniumReportAPI.Models.ProjectRootRelation", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("ParentId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("tbl_ProjectRootRelation");
-                });
-
-            modelBuilder.Entity("SeleniumReportAPI.Models.RootRelation", b =>
-                {
-                    b.Property<int>("RootId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RootId"), 1L, 1);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("Node")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Parent")
-                        .HasColumnType("int");
-
-                    b.HasKey("RootId");
-
-                    b.ToTable("tbl_RootRelation");
-                });
-
             modelBuilder.Entity("SeleniumReportAPI.Models.TestCase", b =>
                 {
                     b.Property<string>("TestCaseName")
@@ -422,6 +346,7 @@ namespace SeleniumReportAPI.Migrations
                         .HasColumnName("TestRunEndDateTime");
 
                     b.Property<string>("TestRunName")
+                        .IsRequired()
                         .HasColumnType("VARCHAR(100)")
                         .HasColumnName("TestRunName");
 
@@ -434,6 +359,7 @@ namespace SeleniumReportAPI.Migrations
                         .HasColumnName("TestSuiteEndDateTime");
 
                     b.Property<string>("TestSuiteName")
+                        .IsRequired()
                         .HasColumnType("VARCHAR(100)")
                         .HasColumnName("TestSuiteName");
 
@@ -446,27 +372,6 @@ namespace SeleniumReportAPI.Migrations
                         .HasColumnName("TesterName");
 
                     b.ToTable("tbl_TestCase");
-                });
-
-            modelBuilder.Entity("SeleniumReportAPI.Models.TestCaseDetails", b =>
-                {
-                    b.Property<int>("TestCaseDetailsId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TestCaseDetailsId"), 1L, 1);
-
-                    b.Property<int>("RootId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("TestCaseName")
-                        .IsRequired()
-                        .HasColumnType("varchar(100)")
-                        .HasColumnName("TestCaseName");
-
-                    b.HasKey("TestCaseDetailsId");
-
-                    b.ToTable("tbl_TestCaseDetails");
                 });
 
             modelBuilder.Entity("SeleniumReportAPI.Models.TestExecution", b =>
@@ -485,57 +390,28 @@ namespace SeleniumReportAPI.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("TestCaseName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TestEnvironment")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TestRunName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TestSuiteName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TesterName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ExecutionId");
 
                     b.ToTable("tbl_TestExecution");
-                });
-
-            modelBuilder.Entity("SeleniumReportAPI.Models.TestStepsDetails", b =>
-                {
-                    b.Property<int>("TestStepsDetailsId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TestStepsDetailsId"), 1L, 1);
-
-                    b.Property<string>("ActionName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("IsOption")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SelectorType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SelectorValue")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("TestCaseDetailsId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Text")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("TestStepsDetailsId");
-
-                    b.ToTable("tbl_TestStepsDetails");
                 });
 
             modelBuilder.Entity("SeleniumReportAPI.Models.TestSuites", b =>
@@ -575,6 +451,23 @@ namespace SeleniumReportAPI.Migrations
                     b.ToTable("tbl_TestSuites");
                 });
 
+            modelBuilder.Entity("SeleniumReportAPI.Models.ApplicationUser", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("OrganizationName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasDiscriminator().HasValue("ApplicationUser");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -586,7 +479,7 @@ namespace SeleniumReportAPI.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("SeleniumReportAPI.Models.ApplicationUser", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -595,7 +488,7 @@ namespace SeleniumReportAPI.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("SeleniumReportAPI.Models.ApplicationUser", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -610,7 +503,7 @@ namespace SeleniumReportAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SeleniumReportAPI.Models.ApplicationUser", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -619,7 +512,7 @@ namespace SeleniumReportAPI.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("SeleniumReportAPI.Models.ApplicationUser", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

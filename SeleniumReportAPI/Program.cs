@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using SeleniumReportAPI.DBContext;
 using SeleniumReportAPI.Helper;
+using SeleniumReportAPI.Models;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,11 +21,17 @@ var connectionString = builder.Configuration.GetConnectionString("AppDBContextCo
 
 builder.Services.AddDbContext<AppDBContext>(options => options.UseSqlServer(connectionString));
 
-builder.Services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<AppDBContext>();
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<AppDBContext>()
+    .AddDefaultTokenProviders();
+
 
 // Add services to the container.
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddNewtonsoftJson(options =>
+    {
+        options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+    });
 builder.Services.AddEndpointsApiExplorer();
 
 // Add CORS
@@ -89,8 +96,7 @@ builder.Services.AddSwaggerGen(option =>
 });
 
 builder.Services.AddTransient<GhostQAExecutor>();
-builder.Services.AddSingleton<DBHelper>();
-
+builder.Services.AddScoped<DBHelper>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -5,7 +5,7 @@ using SeleniumReportAPI.Models;
 
 namespace SeleniumReportAPI.DBContext
 {
-    public class AppDBContext : IdentityDbContext<IdentityUser>
+    public class AppDBContext : IdentityDbContext<ApplicationUser>
     {
         public AppDBContext(DbContextOptions<AppDBContext> options) : base(options)
         {
@@ -17,6 +17,12 @@ namespace SeleniumReportAPI.DBContext
         public DbSet<Models.Browsers> tbl_Browsers { get; set; }
         public DbSet<TestCase> tbl_TestCase { get; set; }
         public DbSet<TestExecution> tbl_TestExecution { get; set; }
+        public DbSet<RootRelation> tbl_RootRelation { get; set; }
+        public DbSet<TestCaseDetails> tbl_TestCaseDetails { get; set; }
+        public DbSet<TestStepsDetails> tbl_TestStepsDetails { get; set; }
+        public DbSet<InternalTestExecution> tbl_InternalTestExecutions { get; set; }
+        public DbSet<ProjectRootRelation> tbl_ProjectRootRelation { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<TestSuites>()
@@ -40,6 +46,8 @@ namespace SeleniumReportAPI.DBContext
             .UseIdentityColumn(seed: 1000);
 
             builder.Entity<Models.TestCase>().HasNoKey();
+
+            builder.Entity<InternalTestExecution>().HasNoKey();
 
             base.OnModelCreating(builder);
         }

@@ -95,6 +95,7 @@ namespace SeleniumReportAPI.Controllers
             }
             else if (action == "SaveAndExecute")
             {
+                string? testerName = User.FindFirst(ClaimTypes.Email)?.Value.ToString();
                 string result = await _helper.AddUpdateTestSuitesJson(model);
                 _response = Newtonsoft.Json.JsonConvert.DeserializeObject<Dto_Response>(result);
                 if (!_response.status.Contains("Fail"))
@@ -103,12 +104,12 @@ namespace SeleniumReportAPI.Controllers
                     Models.Environments _environmentDetails = await _helper.GetEnvironmentById(Convert.ToInt32(model.EnvironmentId));
                     foreach (var testCaseName in model.SelectedTestCases)
                     {
-                        string _testCaseJsonData = await _helper.RunTestCase(model.TestSuiteName.ToString(), testCaseName.ToString(), _testRunName, User.Identity.Name, _environmentDetails.Baseurl, _environmentDetails.BasePath, _environmentDetails.EnvironmentName, _environmentDetails.BrowserName, _environmentDetails.DriverPath);
+                        string _testCaseJsonData = await _helper.RunTestCase(model.TestSuiteName.ToString(), testCaseName.ToString(), _testRunName, testerName, _environmentDetails.Baseurl, _environmentDetails.BasePath, _environmentDetails.EnvironmentName, _environmentDetails.BrowserName, _environmentDetails.DriverPath);
                         if (!string.IsNullOrEmpty(_testCaseJsonData))
                         {
                             Dto_TestCaseData _testSuiteData = Newtonsoft.Json.JsonConvert.DeserializeObject<Dto_TestCaseData>(_testCaseJsonData);
                             _testSuiteData.TestSuiteName = model.TestSuiteName;
-                            _testSuiteData.TesterName = User.Identity.Name;
+                            _testSuiteData.TesterName = testerName;
                             _testSuiteData.TestRunName = _testRunName;
                             _testSuiteData.TestEnvironment = _environmentDetails.BrowserName;
                             //Save Data into table for custom test suite
@@ -213,7 +214,7 @@ namespace SeleniumReportAPI.Controllers
                         {
                             Dto_TestCaseData _testSuiteData = Newtonsoft.Json.JsonConvert.DeserializeObject<Dto_TestCaseData>(_testCaseJsonData);
                             _testSuiteData.TestSuiteName = TestSuiteName;
-                            _testSuiteData.TesterName = User.Identity.Name;
+                            _testSuiteData.TesterName = testerName;
                             _testSuiteData.TestRunName = _testRunName;
                             _testSuiteData.TestEnvironment = _environmentDetails.BrowserName;
                             _testSuiteData.TestCaseName = testCaseName.ToString();
@@ -398,6 +399,50 @@ namespace SeleniumReportAPI.Controllers
         public async Task<ActionResult> IsExecutionInProgress()
         {
             return Ok(await _helper.GetExecutionInProgress());
+        }
+
+
+        /// <summary>
+        /// Get User in Json Format
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("GetUserDetails")]
+        public async Task<ActionResult> GetUserDetails()
+        {
+            return Ok(await _helper.GetUserDetails());
+        }
+
+        /// <summary>
+        /// Update User Profile
+        /// </summary>
+        /// <param updatedUserProfile="updatedUserProfile"></param>
+        /// <returns></returns>
+        [HttpPost("UpdateUserProfile")]
+        public async Task<ActionResult> UpdateUserProfile(Dto_UpdateUserProfile model)
+        {
+            return Ok(await _helper.UpdateUserProfile(model));
+        }
+
+        /// <summary>
+        /// Get User Profile
+        /// </summary>
+        /// <param Email="Email"></param>
+        /// <returns></returns>
+        [HttpPost("GetProfilByEmail")]
+        public async Task<ActionResult> GetProfilByEmail(string Email)
+        {
+            return Ok(await _helper.GetProfilByEmail(Email));
+        }
+
+        /// <summary>
+        /// Disable Enable User
+        /// </summary>
+        /// <param DisableEnableUser="Dto_DisableEnableUser"></param>
+        /// <returns></returns>
+        [HttpPost("DisableEnableUser")]
+        public async Task<ActionResult> DisableEnableUser(Dto_DisableEnableUser model)
+        {
+            return Ok(await _helper.DisableEnableUser(model));
         }
     }
 }

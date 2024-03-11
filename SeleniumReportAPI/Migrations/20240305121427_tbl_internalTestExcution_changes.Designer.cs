@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SeleniumReportAPI.DBContext;
 
@@ -11,9 +12,10 @@ using SeleniumReportAPI.DBContext;
 namespace SeleniumReportAPI.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    partial class AppDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240305121427_tbl_internalTestExcution_changes")]
+    partial class tbl_internalTestExcution_changes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -352,26 +354,7 @@ namespace SeleniumReportAPI.Migrations
                         .HasColumnType("VARCHAR(100)")
                         .HasColumnName("TestSuite");
 
-                    b.ToTable("tbl_InternalTestExecutions");
-                });
-
-            modelBuilder.Entity("SeleniumReportAPI.Models.ProjectRootRelation", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("ParentId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("tbl_ProjectRootRelation");
+                    b.ToTable("tbl_internalTestExecutions");
                 });
 
             modelBuilder.Entity("SeleniumReportAPI.Models.RootRelation", b =>
@@ -513,25 +496,17 @@ namespace SeleniumReportAPI.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TestStepsDetailsId"), 1L, 1);
 
                     b.Property<string>("ActionName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("IsOption")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SelectorType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SelectorValue")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("varchar(100)")
+                        .HasColumnName("ActionName");
 
                     b.Property<int>("TestCaseDetailsId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Text")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("TestStepsName")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)")
+                        .HasColumnName("TestStepsName");
 
                     b.HasKey("TestStepsDetailsId");
 
