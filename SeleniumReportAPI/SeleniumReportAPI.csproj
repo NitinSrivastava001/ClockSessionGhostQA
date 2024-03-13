@@ -9,6 +9,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<None Remove="SqlScript\stp_AddProjectRootRelation.Sql" />
 		<None Remove="SqlScript\stp_AddUpdateApplication.Sql" />
 		<None Remove="SqlScript\stp_AddUpdateBrowser.Sql" />
 		<None Remove="SqlScript\stp_AddUpdateEnvironment.Sql" />
@@ -33,6 +34,8 @@
 		<None Remove="SqlScript\stp_GetUserDetails.Sql" />
 		<None Remove="SqlScript\stp_InsertBuiltInTestSuiteDetails.Sql" />
 		<None Remove="SqlScript\stp_SaveCustomTestSuiteExecutionData.Sql" />
+		<None Remove="SqlScript\stp_SaveExecutionInProgress.Sql" />
+		<None Remove="SqlScript\stp_UpdateExecutionInProgressFlag.Sql" />
 		<None Remove="SqlScript\stp_UpdateTestStepData.Sql" />
 		<None Remove="SqlScript\stp_UpdateUserProfile.Sql" />
 		<None Remove="SqlScript\stp_UpsertTableData.Sql" />
@@ -40,6 +43,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<EmbeddedResource Include="SqlScript\stp_SaveExecutionInProgress.Sql" />
+		<EmbeddedResource Include="SqlScript\stp_UpdateExecutionInProgressFlag.Sql" />
+		<EmbeddedResource Include="SqlScript\stp_AddProjectRootRelation.Sql" />
 		<EmbeddedResource Include="SqlScript\stp_AddUpdateApplication.Sql" />
 		<EmbeddedResource Include="SqlScript\stp_AddUpdateBrowser.Sql" />
 		<EmbeddedResource Include="SqlScript\stp_AddUpdateEnvironment.Sql" />
