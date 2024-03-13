@@ -16,7 +16,9 @@ import { AddUpdateEnvironment } from "../../../../redux/actions/settingAction";
 import { GetApplication, GetBrowser } from "../../../../redux/actions/seleniumAction";
 import { useNavigate } from "react-router-dom";
 
+
 export default function EditNewEnvironment({ onBack ,rowData}) {
+   
   const dispatch=useDispatch();
   const navigate=useNavigate();
 
@@ -30,12 +32,13 @@ export default function EditNewEnvironment({ onBack ,rowData}) {
       ? { value: rowData.BrowserId, label: rowData.BrowserName }
       : null;
   });
-
+  
   const { applicationList,  browserList,  } =useSelector((state) => state.selenium);
 
   useEffect(() => {
     dispatch(GetApplication());
     dispatch(GetBrowser());
+   
   }, []);
   useEffect(() => {
     if (rowData) {
@@ -46,7 +49,7 @@ export default function EditNewEnvironment({ onBack ,rowData}) {
     }
   }, [rowData]);
   const classes = useStyles();
-
+  
   const [formData, setFormData] = useState({
     environmentName: rowData ? rowData.EnvironmentName : "",
     Description: rowData ? rowData.Description : "",
@@ -89,7 +92,7 @@ export default function EditNewEnvironment({ onBack ,rowData}) {
       baseurl:formData.Baseurl
     }
     // Check if there are any errors
-
+    
     let error = {};
     if (!formData.environmentName.trim()) {
       error.name = "Environment Name is required";
@@ -120,7 +123,10 @@ export default function EditNewEnvironment({ onBack ,rowData}) {
       dispatch(AddUpdateEnvironment(payload,navigate,onBack));
       // navigate('/settings/environment')
     }
+
+    
   };
+  
 
   const handleFieldChange = (fieldName, value) => {
     // If changing selectedApplication, update both selectedApplication state and ApplicationId in formData
@@ -131,7 +137,7 @@ export default function EditNewEnvironment({ onBack ,rowData}) {
         selectedApplication: value,
         ApplicationId: selectedApp ? selectedApp.value : 0 // Update ApplicationId based on selected label
       });
-    }
+    } 
     // If changing selectedBrowser, update both selectedBrowser state and BrowserId in formData
     else if (fieldName === "selectedBrowser") {
       const selectedBrw = browserOptions.find(brw => brw.label === value);
@@ -148,7 +154,7 @@ export default function EditNewEnvironment({ onBack ,rowData}) {
       });
     }
   };
-
+  
   const selectStyle={
     container: (provided) => ({
       ...provided,
@@ -187,7 +193,7 @@ export default function EditNewEnvironment({ onBack ,rowData}) {
         color: '#654DF7', // Change the color on hover if desired
       },
     }),
-  }
+  } 
   return (
     <>
       <Grid
@@ -200,7 +206,7 @@ export default function EditNewEnvironment({ onBack ,rowData}) {
         <Grid item xs={6} className={classes.header}>
         <div className={classes.highlight}>Edit Environment</div>
         </Grid>
-
+       
       </Grid>
 
       {/* Body */}
@@ -317,6 +323,7 @@ export default function EditNewEnvironment({ onBack ,rowData}) {
                onChange={(newValue) => {
                 setSelectedApplication(newValue); // Update selectedApplication state
                 handleFieldChange("selectedApplication", newValue?.label);
+                
               }}
                   styles={selectStyle}
                   menuPosition={"fixed"}
@@ -338,7 +345,7 @@ export default function EditNewEnvironment({ onBack ,rowData}) {
                   value={selectedBrowser}
                   isClearable={true}
                   onChange={(newValue) => {
-                    setSelectedBrowser(newValue);
+                    setSelectedBrowser(newValue); 
                     handleFieldChange("selectedBrowser", newValue?.label);
                   }}
                   styles={selectStyle}
@@ -346,7 +353,7 @@ export default function EditNewEnvironment({ onBack ,rowData}) {
                 />
               </Grid>
             </Grid>
-
+            
           </Grid>
           <Grid container>
             <Grid container xs={6}>
@@ -475,10 +482,10 @@ export default function EditNewEnvironment({ onBack ,rowData}) {
                     id="outlined-adornment-name"
                     type="text"
                     fullWidth
-                    value={formData.Baseurl}
+                    value={formData.Baseurl} 
                     error={Error.baseUrl ? true : false}
                     onChange={(e) =>
-                    handleFieldChange("Baseurl", e.target.value)
+                    handleFieldChange("Baseurl", e.target.value) 
                       }
                     className={clsx(
                       classes.customheight,
@@ -489,7 +496,9 @@ export default function EditNewEnvironment({ onBack ,rowData}) {
                 </FormControl>
               </Grid>
             </Grid>
-
+           
+            
+           
           </Grid>
         </Card>
       </Grid>

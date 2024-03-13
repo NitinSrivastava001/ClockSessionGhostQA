@@ -30,7 +30,7 @@ function DeleteSuite({ open,onClose,suitToDelete }) {
           </DialogContentText>
         </DialogContent>
         <DialogActions style={{ justifyContent: 'center' }}>
-        <Button onClick={handleDelete}
+        <Button onClick={handleDelete} 
                 style={{
                   marginRight: "10px",
                   backgroundColor: "#654DF7",
@@ -48,7 +48,7 @@ function DeleteSuite({ open,onClose,suitToDelete }) {
                 }}>
             Cancel
           </Button>
-
+          
         </DialogActions>
       </Dialog>
     </div>

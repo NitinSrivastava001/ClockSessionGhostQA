@@ -71,7 +71,7 @@ export default function MiniDrawer() {
                 })}
             >
                 <Toolbar >
-                        <Grid container spacing={2} alignItems="center" style={{minWidth:'500px'}} >
+                        <Grid container spacing={2} alignItems="center" style={{minWidth:'450px'}} >
                             <Grid item>
                                 <img src={"/images/GhostQA-Logo.png"} alt="logo" />{" "}
                             </Grid>
@@ -81,12 +81,12 @@ export default function MiniDrawer() {
                                 </Link>
                             </Grid>
                             <Grid item>
-                                <Link className={`${classes.linkStyle} ${location.pathname.slice(0, 5) === "/test" && classes.activeLink}`} >
+                                <Link className={`${classes.linkStyle} ${location.pathname.slice(0, 5) === "/api" && classes.activeLink}`} >
                                     API
                                 </Link>
                             </Grid>
                             <Grid item>
-                                <Link className={`${classes.linkStyle} ${location.pathname === "/performance" && classes.activeLink}`}>
+                                <Link to="/performance" className={`${classes.linkStyle} ${location.pathname === "/performance" && classes.activeLink}`}>
                                     Performance
                                 </Link>
                             </Grid>
@@ -143,7 +143,7 @@ export default function MiniDrawer() {
                                                 placement === "bottom" ? "center top" : "center bottom",
                                         }}
                                     >
-                                        <Paper
+                                        <Paper 
                                             onMouseOver={handleMouseOver}
                                             onMouseOut={handleMouseOut}>
                                         <ClickAwayListener onClickAway={() => setShowMenu(false)}>

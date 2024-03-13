@@ -9,7 +9,8 @@ import {
   FormControlLabel,
   Grid,
   Box,
-  Card
+  Card,
+  CircularProgress
 } from "@mui/material";
 import useStyles from "./styles";
 import clsx from "clsx";
@@ -26,6 +27,7 @@ import {
   AddUpdateTestSuites,
 } from "../../redux/actions/seleniumAction";
 import LoadingWave from "../Dashboard/Modal/LoadingWave";
+
 
 export default function AddTestSuite() {
   const dispatch = useDispatch();
@@ -59,7 +61,8 @@ export default function AddTestSuite() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectAll, setSelectAll] = useState(false);
   const [selectedRows, setSelectedRows] = useState([]);
-  const [openLoadingModal, setopenLoadingModal] = useState(false);
+  // const [openLoadingModal, setopenLoadingModal] = useState(false);
+  const [isExecuting, setisExecuting] = useState(false)
 
   const handleRadioChange = (event) => {
     setSelectedSuiteValue(event.target.value);
@@ -80,7 +83,7 @@ export default function AddTestSuite() {
   console.log('app ',app)
   setSelectedApplication(app)
   }
-
+  
   const getTestcaseNameOnly = ()=>{
     let testCaseArrName = []
     selectedRows.map((testCase) => testCaseArrName.push(testCase.TestCaseName))
@@ -90,9 +93,11 @@ export default function AddTestSuite() {
   }
 
   const handleLoading = (status)=>{
-    setopenLoadingModal(false)
+    // setopenLoadingModal(false)
+    setisExecuting(false)
     if(status === 'pass')
     navigate('/')
+
   }
   const handleSubmit = (action) => {
     const testCaseNames= getTestcaseNameOnly()
@@ -146,7 +151,9 @@ export default function AddTestSuite() {
     if (Object.keys(error).length === 0) {
       // Proceed with form submission
       if(action === 'SaveAndExecute'){
-        setopenLoadingModal(true)}
+        // setopenLoadingModal(true)
+        setisExecuting(true)
+      }
       console.log("no error ", payload);
       dispatch(AddUpdateTestSuites(payload, action,handleLoading));
     }else
@@ -175,6 +182,7 @@ export default function AddTestSuite() {
     data?.TestCaseName?.toLowerCase()?.includes(searchTerm?.toLowerCase())
   );
 
+  
   const selectStyle={
     container: (provided) => ({
       ...provided,
@@ -213,15 +221,15 @@ export default function AddTestSuite() {
         color: '#654DF7', // Change the color on hover if desired
       },
     }),
-  }
+  } 
   return (
     <>
       <div className={classes.main}>
-      <LoadingWave
+      {/* <LoadingWave
         open={openLoadingModal}
         onClose={() => setopenLoadingModal(false)}
         suiteName={name}
-        />
+        /> */}
         <Grid container >
           {/* First Section */}
           <Grid item xs={12} sm={4}>
@@ -541,6 +549,10 @@ export default function AddTestSuite() {
                           </Grid>
                         </Grid>
 
+                        
+
+                        
+
                         {/* Row 6: Browser Dropdown */}
                         {/* <Grid item>
                           <div className={classes.input}>
@@ -693,7 +705,17 @@ export default function AddTestSuite() {
                       },
                     }}
                   >
-                      Save & Execute
+                    {!isExecuting ? (
+                      "Save & Execute"
+                    ) : (
+                      <CircularProgress
+                        size={25}
+                        style={{
+                          marginRight: "8px",
+                          color: "#fff"
+                        }}
+                      />
+                    )}
                   </Button>
 
                   <Button

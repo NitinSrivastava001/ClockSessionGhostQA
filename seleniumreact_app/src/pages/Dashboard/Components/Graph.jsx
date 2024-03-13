@@ -140,7 +140,8 @@ const Graph = (props) => {
                 name: "Total Failed Test Case",
                 data: TotalFailedTestCase,
               },
-
+             
+              
             ],
           };
 
@@ -158,8 +159,8 @@ const Graph = (props) => {
   return (
     <>
       <div>
-        <Grid
-        container
+        <Grid 
+        container 
         direction="row"
         justifyContent="flex-start"
         alignItems="center">

@@ -16,16 +16,21 @@ import { GetApplication, GetBrowser } from "../../../../redux/actions/seleniumAc
 import { AddUpdateEnvironment } from "../../../../redux/actions/settingAction";
 import { useNavigate } from "react-router-dom";
 
+
 export default function AddNewEnvironment({ onBack }) {
   const navigate=useNavigate();
   const dispatch=useDispatch();
   useEffect(() => {
     dispatch(GetApplication());
     dispatch(GetBrowser());
+    
   }, []);
 
-  const classes = useStyles();
+ 
 
+
+  const classes = useStyles();
+ 
   const { applicationList,  browserList,  } =useSelector((state) => state.selenium);
   const [formData, setFormData] = useState({
     environmentName: "",
@@ -150,7 +155,7 @@ export default function AddNewEnvironment({ onBack }) {
         color: '#654DF7', // Change the color on hover if desired
       },
     }),
-  }
+  } 
   return (
     <>
       <Grid
@@ -228,7 +233,7 @@ export default function AddNewEnvironment({ onBack }) {
                     onChange={(e) =>
                       handleFieldChange("environmentName", e.target.value)
                     }
-
+                   
                     className={clsx(
                       classes.customheight,
                       classes.customFontSize,
@@ -288,7 +293,7 @@ export default function AddNewEnvironment({ onBack }) {
                       classes.customFontSize,
                       classes.customBackgroung
                     )}
-
+                    
                   />
                   {/* {Error.description && (
                       <Typography variant="caption" color="error">
@@ -354,7 +359,7 @@ export default function AddNewEnvironment({ onBack }) {
                     )} */}
               </Grid>
             </Grid>
-
+            
           </Grid>
           <Grid container>
             <Grid container xs={6}>
@@ -515,7 +520,9 @@ export default function AddNewEnvironment({ onBack }) {
                 </FormControl>
               </Grid>
             </Grid>
-
+           
+            
+           
           </Grid>
         </Card>
       </Grid>

@@ -37,10 +37,10 @@ export default function Application() {
     setApplicationToEdit(null)
   };
 
-  const filteredData = applicationList?.filter((data) =>
+  const filteredData = applicationList? applicationList.filter((data) =>
     data?.ApplicationName?.toLowerCase()?.includes(searchTerm?.toLowerCase())
-  );
-
+  ):[]
+  
   return (
     <>
       {showAddNewApplication ? (

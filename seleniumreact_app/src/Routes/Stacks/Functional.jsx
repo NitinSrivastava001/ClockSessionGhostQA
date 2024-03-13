@@ -23,7 +23,7 @@ export default function Functional() {
                 <Grid item>
                     <Link
                         to="/settings/Environment"
-                        className={`${classes.linkStyle} ${location.pathname.slice(0, 9) === "/settings" && classes.activeLink}`}
+                        className={`${classes.linkStyle} ${location.pathname.startsWith("/settings") && classes.activeLink}`}
                         style={{ marginLeft: "20px" }}
                         onClick={() => {
                             sessionStorage.setItem("selectedCategory", Flatted.stringify({
@@ -36,8 +36,18 @@ export default function Functional() {
                         Settings
                     </Link>
                 </Grid>
+                <Grid item>
+                   
+                    <Link
+                        to="/testLab"
+                        style={{ marginLeft: "20px" }}
+                        className={`${classes.linkStyle} ${location.pathname.startsWith("/testLab") && classes.activeLink}`}
+                    >
+                         Test Lab
+                    </Link>
+                </Grid>
             </Grid>
-
+            
             <div style={{ paddingTop: '30px' }}>
                 <Outlet />
             </div>

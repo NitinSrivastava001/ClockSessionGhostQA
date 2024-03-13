@@ -22,6 +22,8 @@ export const getTestSuitesList = () => {
 };
 
 export const AddUpdateEnvironment = (data,navigate,onBack) => {
+
+
   return async (dispatch) => {
       try {
           const res = await axios.post(
@@ -39,12 +41,12 @@ export const AddUpdateEnvironment = (data,navigate,onBack) => {
               });
               onBack();
             }
-            else if (res.data.status === "fail") {
-                toast.error(res.data.message);
+            else if (res.data.status === "fail") { 
+                toast.error(res.data.message); 
                 onBack();
                 // navigate('/settings/environment')
             }
-
+          
           console.log("saved ", res)
       } catch (error) {
           console.log("error sending ", error);
@@ -64,13 +66,15 @@ export const AddUpdateApplication = (data)=>{
         dispatch(GetApplication())
         toast.info(res.data.message, {
           style: {
-            background: 'rgb(101, 77, 247)',
-            color: 'rgb(255, 255, 255)',
+            background: 'rgb(101, 77, 247)', 
+            color: 'rgb(255, 255, 255)', 
           },
         });
-    }
-    else if (res.data.status === "fail") {
-      toast.error(res.data.message);
+    } 
+    else if (res.data.status === "fail") { 
+      toast.error(res.data.message); 
+     
+      
   }
     }catch (error) {
       console.log("error adding ",error);
@@ -80,6 +84,7 @@ export const AddUpdateApplication = (data)=>{
 }
 
 export const AddUpdateBrowser = (data)=>{
+  
   return async (dispatch)=>{
     try {
       const res = await axios.post(
@@ -90,13 +95,13 @@ export const AddUpdateBrowser = (data)=>{
         dispatch(GetBrowser())
         toast.info(res.data.message, {
           style: {
-            background: 'rgb(101, 77, 247)',
-            color: 'rgb(255, 255, 255)',
+            background: 'rgb(101, 77, 247)', 
+            color: 'rgb(255, 255, 255)', 
           },
         });
-    }
-    else if (res.data.status === "fail") {
-      toast.error(res.data.message);
+    } 
+    else if (res.data.status === "fail") { 
+      toast.error(res.data.message); 
   }
     }catch (error) {
       console.log("error adding ",error);
@@ -120,8 +125,9 @@ export const DeleteEnvironment = (id) => {
                        color: 'rgb(255, 255, 255)',
                    },
                });
+              
              }
-
+           
           return response
        } catch (error) {
            console.log("error sending ", error);
@@ -159,6 +165,7 @@ export const DeleteEnvironment = (id) => {
   };
 };
 
+
 export const DeleteBrowser = (brwId) => {
   return async (dispatch) => {
     try {
@@ -177,7 +184,7 @@ export const DeleteBrowser = (brwId) => {
             color: 'rgb(255, 255, 255)',
           },
         });
-      }
+      }  
       return response
     } catch (error) {
       console.log('Error deleting ', error);

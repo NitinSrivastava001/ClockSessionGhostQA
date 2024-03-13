@@ -27,8 +27,8 @@ export const useStyles = makeStyles((theme) => ({
             duration: theme.transitions.duration.enteringScreen,
         }),
     },
-    borderCheck: {
-        border: '1px solid red',
+    borderCheck:{
+        border:'1px solid red',
     },
     linkStyle: {
         textDecoration: 'none',

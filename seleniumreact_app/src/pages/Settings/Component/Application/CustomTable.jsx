@@ -15,6 +15,7 @@ export function CustomTable({ rows,handleEditApplication}) {
   const [item, setitem] = useState(null)
   const [AppOrBrow, setAppOrBrow] = useState('application')
 
+
   const handleDelete = (row) => {
     setopenDelModal(true)
     setitem(row)

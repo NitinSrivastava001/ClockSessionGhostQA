@@ -26,7 +26,7 @@ export default function AddNewApplication({ onBack,addOredit,applicationToEdit,
   const [Error, setError] = useState({
     ApplicationNameErrMsg: ""
   });
-
+  
   const handleSubmit = () => {
     let payload = {
       ApplicationId:applicationToEdit?applicationToEdit.ApplicationId:0,
