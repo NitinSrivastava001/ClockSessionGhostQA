@@ -1,6 +1,5 @@
 ﻿using ClocksessionGhostQAAutomation.TestSuites.LoginSuite.Tests;
 using ClocksessionGhostQAAutomation.Utils;
-using MyersAndStaufferSeleniumTests.Utils;
 using OpenQA.Selenium;
 using System.Text;
 

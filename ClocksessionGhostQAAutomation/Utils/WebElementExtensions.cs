@@ -2,7 +2,7 @@
 using OpenQA.Selenium.Support.UI;
 using System.Text.RegularExpressions;
 
-namespace MyersAndStaufferSeleniumTests.Utils
+namespace ClocksessionGhostQAAutomation.Utils
 {
     public static class WebElementExtensions
     {

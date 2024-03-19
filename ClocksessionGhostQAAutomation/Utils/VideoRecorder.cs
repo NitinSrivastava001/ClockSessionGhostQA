@@ -1,50 +1,63 @@
 ﻿using ClocksessionGhostQAAutomation.TestSuites.LoginSuite.Tests;
 using System.Diagnostics;
 
-namespace myersandstaufferframework
+namespace ClocksessionGhostQAAutomation.Utils
 {
     public class VideoRecorder
     {
-        private Process ffmpegProcess;
+        private static Process ffmpegProcess;
         public static string basePath = GhostQAExecutor.Basepath;
+        public static string videoPath = Path.Combine(GhostQAExecutor.Basepath, "Recordings", DateTime.Now.ToString("dd-MM-yyyy"));
+        public static string outputFile = string.Empty;
 
-        public void StartRecording()
+        public static void StartRecording()
         {
-            var dateTime = DateTime.Now.ToString("dd-MMM-yyyy HH:mm:ss.fffffffzzz");
-            var date = DateTime.Now.ToString("dd-MM-yyyy");
-            var time = DateTime.Now.ToString("HH-mm-ss");
+            if (!Directory.Exists(videoPath))
+            {
+                Directory.CreateDirectory(videoPath);
+            }
 
-            String outputFile = GhostQAExecutor.Basepath + date + "\\" + time + ".mp4";
-            String ffmpegPath = @"C:\ffmpeg-6.1.1-essentials_build\bin\ffmpeg.exe";
+            outputFile = Path.Combine(videoPath, DateTime.Now.ToString("HH-mm-ss") + ".webm");
+
+            string ffmpegPath = @"C:\ffmpeg-6.1.1-essentials_build\bin\ffmpeg.exe";
+
             // Example FFmpeg command to start recording
-            string command = $"{ffmpegPath} -f gdigrab -framerate 30 -i desktop -c:v libx264rgb -preset ultrafast -qp 0 -f mp4 E:\\GhostQACode\\output1.mp4";
+            string command = $"-f gdigrab -framerate 30 -i desktop -c:v libx264rgb -preset ultrafast -qp 0 -f webm \"{outputFile}\"";
 
             // Start FFmpeg process
             ffmpegProcess = new Process
             {
                 StartInfo = new ProcessStartInfo
                 {
-                    FileName = "cmd.exe",
+                    FileName = ffmpegPath,
+                    Arguments = command,
                     RedirectStandardInput = true,
                     UseShellExecute = false,
                     CreateNoWindow = false
                 }
             };
-            ffmpegProcess.Start();
-            Console.WriteLine("Recoridng Started....");
+
+            try
+            {
+                ffmpegProcess.Start();
+                Console.WriteLine("Recording started...");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error starting recording: {ex.Message}");
+            }
 
             // Send the FFmpeg command to cmd.exe
             ffmpegProcess.StandardInput.WriteLine(command);
-            //ffmpegProcess.StandardInput.Flush();
-            //ffmpegProcess.StandardInput.Close();
         }
 
-        public void StopRecording()
+        public static void StopRecording()
         {
             Process[] processes = Process.GetProcessesByName("ffmpeg");
+            ffmpegProcess.Kill();
             foreach (Process process in processes)
             {
-                process.CloseMainWindow();
+                process.Kill();
                 process.WaitForExit();
             }
             Console.WriteLine("Recording Stopped...");

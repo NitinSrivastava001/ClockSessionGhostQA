@@ -1,6 +1,4 @@
 ﻿using ClocksessionGhostQAAutomation.Utils;
-using myersandstaufferframework;
-using MyersAndStaufferSeleniumTests.Utils;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
@@ -14,43 +12,24 @@ namespace ClocksessionGhostQAAutomation.TestSuites.LoginSuite.Tests
     {
         public static string basePath = GhostQAExecutor.Basepath;
         public static string EnvironmentName = GhostQAExecutor.environmentName;
-
-        //public Authentication Credentials = new Authentication();
         public IWebDriver driver;
-
         private static string LoggingPath { get; set; }
         public static TestData _testData = TestDataSharedInstance.testData;
         public static List<TestStepColumns> _testSteps = TestCaseStepsInstance.TestSteps;
-        private Guid newGuid = Guid.NewGuid();
-        private string videoPath = basePath + "video.mp4";
-        public VideoRecorder videoRecorder = new();
 
         public BaseTest()
         {
             _testData.TestSuiteStartDateTime = DateTime.Now.ToString("dd-MMM-yyyy HH:mm:ss.fffffffzzz");
             _testData.TestEnvironment = EnvironmentName;
-            //if (GhostQAExecutor.Basepath == "")
-            //{
-            //    //Read from config file except to API Url
-
-            //}
-            //else
-            //{
-            //    basePath = GhostQAExecutor.Basepath;
-            //}
+            _testData.TestRunName = Guid.NewGuid().ToString();
         }
 
         [SetUp]
         public void SetUp()
         {
-            string videoPath = basePath + "video.mp4";
-            videoRecorder = new VideoRecorder();
-            videoRecorder.StartRecording();
             StringBuilder logMessage = new StringBuilder();
-            //_testData.TestCaseName = TestContext.CurrentContext.Test.Name;
             // Get Browser settings
             string baseURL = GhostQAExecutor.Baseurl;
-            _testData.TestRunName = newGuid.ToString();
             _testData.TesterName = "Nitin Srivastava";
             WindowSize browserWindowSize = new WindowSize(1280, 720);
             LogMessage(logMessage.ToString());
@@ -86,7 +65,7 @@ namespace ClocksessionGhostQAAutomation.TestSuites.LoginSuite.Tests
 
             _testData.TestRunEndDateTime = DateTime.Now.ToString("dd-MMM-yyyy HH:mm:ss.fffffffzzz");
             _testData.TestCaseSteps = "-";
-            videoRecorder.StopRecording();
+            VideoRecorder.StopRecording();
             Browser.Driver.Dispose();
             _testData.TestSuiteEndDateTime = DateTime.Now.ToString("dd-MMM-yyyy HH:mm:ss.fffffffzzz");
             _testData.TestCaseSteps = JsonConvert.SerializeObject(_testSteps.Where(x => x.Timestamp is not null && (x.Status is not null || x.Status != string.Empty)));

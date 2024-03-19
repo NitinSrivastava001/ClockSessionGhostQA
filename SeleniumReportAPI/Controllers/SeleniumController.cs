@@ -100,7 +100,7 @@ namespace SeleniumReportAPI.Controllers
                 _response = Newtonsoft.Json.JsonConvert.DeserializeObject<Dto_Response>(result);
                 if (!_response.status.Contains("Fail"))
                 {
-                    string _testRunName = await _helper.GetRunId(model.TestSuiteName);
+                    string _testRunName = Convert.ToString(Guid.NewGuid());//await _helper.GetRunId(model.TestSuiteName);
                     Models.Environments _environmentDetails = await _helper.GetEnvironmentById(Convert.ToInt32(model.EnvironmentId));
                     foreach (var testCaseName in model.SelectedTestCases)
                     {
@@ -111,7 +111,7 @@ namespace SeleniumReportAPI.Controllers
                             _testSuiteData.TestSuiteName = model.TestSuiteName;
                             _testSuiteData.TesterName = testerName;
                             _testSuiteData.TestRunName = _testRunName;
-                            _testSuiteData.TestEnvironment = _environmentDetails.BrowserName;
+                            _testSuiteData.TestEnvironment = _environmentDetails.EnvironmentName;
                             //Save Data into table for custom test suite
                             string _result = await _helper.SaveTestCaseData(Newtonsoft.Json.JsonConvert.SerializeObject(_testSuiteData));
                         }
@@ -196,7 +196,7 @@ namespace SeleniumReportAPI.Controllers
         public async Task<ActionResult> ExecuteTestSuite(string TestSuiteName)
         {
             string _result = string.Empty;
-            string _testRunName = await _helper.GetRunId(TestSuiteName);
+            string _testRunName = Convert.ToString(Guid.NewGuid()); //await _helper.GetRunId(TestSuiteName);
             string _testSuiteDetailsJson = await _helper.GetTestSuiteByName(TestSuiteName);
             string? testerName = User.FindFirst(ClaimTypes.Email)?.Value.ToString();
             Dto_TestSuiteDetailsData _testSuiteDetails = Newtonsoft.Json.JsonConvert.DeserializeObject<Dto_TestSuiteDetailsData>(_testSuiteDetailsJson);
@@ -216,8 +216,8 @@ namespace SeleniumReportAPI.Controllers
                             _testSuiteData.TestSuiteName = TestSuiteName;
                             _testSuiteData.TesterName = testerName;
                             _testSuiteData.TestRunName = _testRunName;
-                            _testSuiteData.TestEnvironment = _environmentDetails.BrowserName;
                             _testSuiteData.TestCaseName = testCaseName.ToString();
+                            _testSuiteData.TestEnvironment = _environmentDetails.EnvironmentName;
                             //Save Data into table for custom test suite
                             _result = await _helper.SaveTestCaseData(Newtonsoft.Json.JsonConvert.SerializeObject(_testSuiteData));
                         }

@@ -5,7 +5,7 @@ using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System.Text;
 
-namespace MyersAndStaufferSeleniumTests.Utils
+namespace ClocksessionGhostQAAutomation.Utils
 {
     public static class WebDriverExtensions
     {

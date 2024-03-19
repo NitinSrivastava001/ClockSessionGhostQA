@@ -1,4 +1,4 @@
-﻿using MyersAndStaufferSeleniumTests.Utils;
+﻿using ClocksessionGhostQAAutomation.Utils;
 using OpenQA.Selenium;
 
 namespace ClocksessionGhostQAAutomation.TestSuites.LoginSuite.Pages
