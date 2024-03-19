@@ -1,4 +1,5 @@
 ﻿using ClocksessionGhostQAAutomation.TestSuites.LoginSuite.Tests;
+using ExcelDataReader;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
@@ -974,9 +975,8 @@ namespace SeleniumReportAPI.Helper
             var fromEmail = _configuration["EmailDetails:EmailUsername"];
             var hostName = _configuration["EmailDetails:EmailHost"];
             var subject = "Invitation to Join Our Platform";
-            if (Mailtype.Equals("Invitation"))
-            {
-                BodyString = @"<!DOCTYPE html>
+            BodyString = Mailtype.Equals("Invitation")
+                ? @"<!DOCTYPE html>
                             <html lang=""en"">
                             <body style=""font-family: Arial, sans-serif; margin: 0; padding: 0;"">
 
@@ -991,16 +991,13 @@ namespace SeleniumReportAPI.Helper
                                   <p>Dear [" + toEmail.ToUpper() + @"],</p>
                                   <p>We are thrilled to invite you to join Ghost-QA Plateform! 🌟</p>
                                   <p>To accept your invitation and dive into the excitement, simply click the button below:</p>
-                                  <p><a href=""http://codearrest.dyndns.org:3008/AcceptInvitation/" + toEmail + @""" style=""background-color: #654DF7; border: none; color: white; padding: 15px 25px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer; border-radius: 8px;"">View Invitation</a></p>
+                                  <p><a href=""http://codearrest.dyndns.org:3009/AcceptInvitation/" + toEmail + @""" style=""background-color: #654DF7; border: none; color: white; padding: 15px 25px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer; border-radius: 8px;"">View Invitation</a></p>
                                 </td>
                               </tr>
                             </table>
                             </body>
-                            </html>";
-            }
-            else
-            {
-                BodyString = Mailtype.Equals("Accept")
+                            </html>"
+                : Mailtype.Equals("Accept")
                     ? @"<!DOCTYPE html>
                             <html lang=""en"">
                             <body style=""font-family: Arial, sans-serif; margin: 0; padding: 0;"">
@@ -1018,14 +1015,13 @@ namespace SeleniumReportAPI.Helper
                                   <p> Thank you for accepting invitation here is your temprory password:</p>
                                   <em><b> Password: </b> Test@123 </em>
                                   <p> If you want to change your password follow below link </p>
-                                  <p><a href=""http://codearrest.dyndns.org:3008/ChangePassword/" + toEmail + @""" style=""background-color: #654DF7; border: none; color: white; padding: 15px 25px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer; border-radius: 8px;"">Change Password</a></p>
+                                  <p><a href=""http://codearrest.dyndns.org:3009/ChangePassword/" + toEmail + @""" style=""background-color: #654DF7; border: none; color: white; padding: 15px 25px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer; border-radius: 8px;"">Change Password</a></p>
                                 </td>
                               </tr>
                             </table>
                             </body>
                             </html>"
                     : "";
-            }
             var smtpClient = new SmtpClient(hostName)
             {
                 Port = 587,
@@ -1054,6 +1050,7 @@ namespace SeleniumReportAPI.Helper
                 status = "Success",
                 message = result
             };
+
         }
 
         public async Task<object> AcceptInvitation(string Email)
@@ -1062,6 +1059,7 @@ namespace SeleniumReportAPI.Helper
             {
                 return new { message = "Invalid email address format." };
             }
+
 
             ApplicationUser user = new()
             {
@@ -1119,7 +1117,6 @@ namespace SeleniumReportAPI.Helper
                 ? IdentityResult.Success
                 : IdentityResult.Failed(new IdentityError { Description = "Failed to change password." });
         }
-
         internal async Task<string> GetUserDetails()
         {
             string UsersListJson = string.Empty;
@@ -1306,7 +1303,6 @@ namespace SeleniumReportAPI.Helper
             }
             return result;
         }
-
         internal async Task<string> GetTestStepsDetails()
         {
             string result = string.Empty;
@@ -1370,7 +1366,6 @@ namespace SeleniumReportAPI.Helper
             }
             return result;
         }
-
         internal async Task<string> AddTestCaseDetails(TestCaseDetails model)
         {
             string result = string.Empty;
@@ -1384,6 +1379,7 @@ namespace SeleniumReportAPI.Helper
                         command.CommandType = CommandType.StoredProcedure;
                         command.Parameters.AddWithValue("@TestCaseDetailsId", model.TestCaseDetailsId);
                         command.Parameters.AddWithValue("@RootId", model.RootId);
+                        command.Parameters.AddWithValue("@StartUrl", model.StartUrl);
                         command.Parameters.AddWithValue("@TestCaseName", model.TestCaseName);
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
@@ -1403,7 +1399,6 @@ namespace SeleniumReportAPI.Helper
             }
             return result;
         }
-
         internal async Task<string> AddTestStepsDetails(Dto_AddTestStepsJson AddStepsJson)
         {
             string result = string.Empty;
@@ -1434,7 +1429,6 @@ namespace SeleniumReportAPI.Helper
             }
             return result;
         }
-
         internal async Task<string> UpdateRootRelation(RootRelation model)
         {
             string result = string.Empty;
@@ -1466,7 +1460,6 @@ namespace SeleniumReportAPI.Helper
             }
             return result;
         }
-
         internal async Task<string> GetTestCaseDetailsByRootId(int RootId)
         {
             string result = string.Empty;
@@ -1497,7 +1490,6 @@ namespace SeleniumReportAPI.Helper
             }
             return result;
         }
-
         internal async Task<string> GetTestStepsDetailsByTestStepsId(int TestStepsId)
         {
             string result = string.Empty;
@@ -1560,7 +1552,6 @@ namespace SeleniumReportAPI.Helper
             }
             return result;
         }
-
         internal async Task<string> GetExcutedByRootId(int RootId)
         {
             string result = string.Empty;
@@ -1653,7 +1644,6 @@ namespace SeleniumReportAPI.Helper
             }
             return result;
         }
-
         internal async Task<string> UpdateProjectData(ProjectRootRelation model)
         {
             string result = string.Empty;
@@ -1685,7 +1675,6 @@ namespace SeleniumReportAPI.Helper
             }
             return result;
         }
-
         internal async Task<string> DeleteProjectData(ProjectRootRelation model)
         {
             string result = string.Empty;
@@ -1699,6 +1688,543 @@ namespace SeleniumReportAPI.Helper
                         command.CommandType = CommandType.StoredProcedure;
                         command.Parameters.AddWithValue("@Id", model.Id);
                         command.Parameters.AddWithValue("@ParentId", model.ParentId);
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.HasRows)
+                            {
+                                reader.Read();
+                                result = reader["result"].ToString();
+                            }
+                        }
+                    }
+                    connection.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return result;
+        }
+
+        internal async Task<string> AddPerformanceFile(Dto_AddPerformance model)
+        {
+            string result = string.Empty;
+            try
+            {
+                string directoryPath = @"C:\GhostQA\SeleniumReportAPI\wwwroot\TestDataFile\";
+                string filePath = Path.Combine(directoryPath, model.FileName);
+
+                // Ensure directory exists
+                if (!Directory.Exists(directoryPath))
+                {
+                    Directory.CreateDirectory(directoryPath);
+                }
+
+                // Save uploaded file to disk
+                using (FileStream stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await model.BinaryData.CopyToAsync(stream);
+                }
+
+                // Save file path to database
+                using (SqlConnection connection = new SqlConnection(GetConnectionString()))
+                {
+                    await connection.OpenAsync();
+                    using (SqlCommand command = new SqlCommand("stp_AddPerformance", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@RootId", model.RootId);
+                        command.Parameters.AddWithValue("@TestCaseName", model.TestCaseName);
+                        command.Parameters.AddWithValue("@FileName", filePath); // Save file name instead of full path
+                        await command.ExecuteNonQueryAsync();
+                    }
+                }
+
+                result = "Success";
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions appropriately, logging or rethrowing as necessary
+                Console.WriteLine($"An error occurred: {ex.Message}");
+                result = "Failed"; // Update result to indicate failure
+            }
+            return result;
+        }
+
+        internal async Task<string> GetPerformanceFileByRootId(int RootId)
+        {
+            string result = string.Empty;
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(GetConnectionString()))
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand("stp_GetPerformaceFile", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@RootId", RootId);
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.HasRows)
+                            {
+                                reader.Read();
+                                result = reader["result"].ToString();
+                            }
+                        }
+                    }
+                    connection.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return result;
+        }
+        internal async Task<string> DeletePerformanceFile(int Id)
+        {
+            string result = string.Empty;
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(GetConnectionString()))
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand("stp_DeletePerformanceFile", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@Id", Id);
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.HasRows)
+                            {
+                                reader.Read();
+                                result = reader["result"].ToString();
+                            }
+                        }
+                    }
+                    connection.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return result;
+        }
+        internal async Task<string> UploadFiles(IFormFile file, string basePath)
+        {
+            string result = string.Empty;
+            try
+            {
+                string recordingFolderPath = string.Empty;
+                string filePath = string.Empty;
+                if (file.ContentType.Contains("video"))
+                {
+                    recordingFolderPath = Path.Combine(basePath, "Recordings");
+                    //Video Save Directory
+                    string videodir = Path.Combine(recordingFolderPath, $"{DateTime.Now:yyyy-MM-dd}");
+                    if (!Directory.Exists(videodir))
+                    {
+                        Directory.CreateDirectory(videodir);
+                    }
+
+                    //Record to a file and save on local
+                    filePath = Path.Combine(videodir, $"{DateTime.Now:yyyy-MM-dd_hh-mm-ss}.webm");
+                }
+                else
+                {
+                    var FailureSSPath = Path.Combine(basePath, "FailureScreenShots", DateTime.Now.ToString("MMMM_dd_yyyy"));
+                    if (!Directory.Exists(FailureSSPath))
+                    {
+                        Directory.CreateDirectory(FailureSSPath);
+                    }
+                    filePath = Path.Combine(FailureSSPath, file.FileName + DateTime.Now.ToString("yy-MM-dd hh-mm-ss") + ".png");
+                }
+
+                // Save uploaded file to disk
+                using (FileStream stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+
+                result = "Success";
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions appropriately, logging or rethrowing as necessary
+                Console.WriteLine($"An error occurred: {ex.Message}");
+                result = "Failed"; // Update result to indicate failure
+            }
+            return result;
+        }
+        internal async Task<string> AddLocation(PerformanceLocation model)
+        {
+            string result = string.Empty;
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(GetConnectionString()))
+                {
+                    await connection.OpenAsync();
+                    using (SqlCommand command = new SqlCommand("stp_AddLocation", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@PerformanceFileId", model.PerformanceFileId);
+                        command.Parameters.AddWithValue("@Name", model.Name);
+                        command.Parameters.AddWithValue("@NumberUser", model.NumberUser);
+                        command.Parameters.AddWithValue("@PercentageTraffic", model.PercentageTraffic);
+                        await command.ExecuteNonQueryAsync();
+                    }
+                }
+
+                result = "Success";
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return result;
+        }
+
+        internal async Task<string> GetLocationByPerformanceFileId(int PerformanceFileId)
+        {
+            string result = string.Empty;
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(GetConnectionString()))
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand("stp_GetLocationByPerformanceFileId", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@PerformanceFileId", PerformanceFileId);
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.HasRows)
+                            {
+                                reader.Read();
+                                result = reader["result"].ToString();
+                            }
+                        }
+                    }
+                    connection.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return result;
+        }
+        internal async Task<string> DeleteLocation(int Id)
+        {
+            string result = string.Empty;
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(GetConnectionString()))
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand("stp_DeleteLocation", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@Id", Id);
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.HasRows)
+                            {
+                                reader.Read();
+                                result = reader["result"].ToString();
+                            }
+                        }
+                    }
+                    connection.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return result;
+        }
+        internal async Task<string> AddProperty(PerformanceProperties model)
+        {
+            string result = string.Empty;
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(GetConnectionString()))
+                {
+                    await connection.OpenAsync();
+                    using (SqlCommand command = new SqlCommand("stp_AddProperties", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@PerformanceFileId", model.PerformanceFileId);
+                        command.Parameters.AddWithValue("@Name", model.Name);
+                        command.Parameters.AddWithValue("@Value", model.Value);
+                        await command.ExecuteNonQueryAsync();
+                    }
+                }
+
+                result = "Success";
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return result;
+        }
+
+        internal async Task<string> GetPropertyByPerformanceFileId(int PerformanceFileId)
+        {
+            string result = string.Empty;
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(GetConnectionString()))
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand("stp_GetPropertyByPerformanceFileId", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@PerformanceFileId", PerformanceFileId);
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.HasRows)
+                            {
+                                reader.Read();
+                                result = reader["result"].ToString();
+                            }
+                        }
+                    }
+                    connection.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return result;
+        }
+        internal async Task<string> DeleteProperties(int Id)
+        {
+            string result = string.Empty;
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(GetConnectionString()))
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand("stp_DeleteProperties", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@Id", Id);
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.HasRows)
+                            {
+                                reader.Read();
+                                result = reader["result"].ToString();
+                            }
+                        }
+                    }
+                    connection.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return result;
+        }
+
+        internal async Task<string> AddTestData(Dto_AddTestData model)
+        {
+            string result = string.Empty;
+            string name = string.Empty;
+            IExcelDataReader reader = null;
+            DataTable dt = null;
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+            using (var stream = new MemoryStream())
+            {
+                await model.File.CopyToAsync(stream);
+                name = model.File.FileName;
+                reader = ExcelReaderFactory.CreateCsvReader(stream);
+                var dataSet = reader.AsDataSet(new ExcelDataSetConfiguration
+                {
+                    ConfigureDataTable = _ => new ExcelDataTableConfiguration
+                    {
+                        UseHeaderRow = true
+                    }
+                });
+                dt = dataSet.Tables[0];
+
+            }
+
+            List<Dictionary<string, object>> rows = new List<Dictionary<string, object>>();
+            Dictionary<string, object> row;
+            foreach (DataRow dr in dt.Rows)
+            {
+                row = new Dictionary<string, object>();
+                foreach (DataColumn col in dt.Columns)
+                {
+                    row.Add(col.ColumnName, dr[col]);
+                }
+                rows.Add(row);
+            }
+            var JsonData = JsonConvert.SerializeObject(rows);
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(GetConnectionString()))
+                {
+                    await connection.OpenAsync();
+                    using (SqlCommand command = new SqlCommand("stp_AddTestData", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@PerformanceFileId", model.PerformanceFileId);
+                        command.Parameters.AddWithValue("@Name", name);
+                        command.Parameters.AddWithValue("@JsonData", JsonData);
+                        await command.ExecuteNonQueryAsync();
+                    }
+                }
+
+                result = "Success";
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return result;
+        }
+
+        internal async Task<string> GetTestDataByPerformanceFileId(int PerformanceFileId)
+        {
+            string result = string.Empty;
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(GetConnectionString()))
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand("stp_GetTestDataByPerformanceFileId", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@PerformanceFileId", PerformanceFileId);
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.HasRows)
+                            {
+                                reader.Read();
+                                result = reader["result"].ToString();
+                            }
+                        }
+                    }
+                    connection.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return result;
+        }
+
+        internal async Task<string> DeleteTestData(int Id)
+        {
+            string result = string.Empty;
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(GetConnectionString()))
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand("stp_DeleteTestData", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@Id", Id);
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.HasRows)
+                            {
+                                reader.Read();
+                                result = reader["result"].ToString();
+                            }
+                        }
+                    }
+                    connection.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return result;
+        }
+        internal async Task<object> AddUpdateLoadData(Dto_Load loadData)
+        {
+            string result = string.Empty;
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(GetConnectionString()))
+                {
+                    await connection.OpenAsync();
+                    using (SqlCommand command = new SqlCommand("stp_AddUpdateLoadData", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@PerformanceFileId", loadData.PerformancefileId);
+                        command.Parameters.AddWithValue("@TotalUser", loadData.TotalUsers);
+                        command.Parameters.AddWithValue("@DurationMin", loadData.DurationInMinutes);
+                        command.Parameters.AddWithValue("@RampupTime", loadData.RampupTime);
+                        command.Parameters.AddWithValue("@Steps", loadData.RampupSteps);
+                        await command.ExecuteNonQueryAsync();
+                    }
+                }
+
+                result = "Success";
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return result;
+        }
+
+        internal async Task<string> GetLoadByPerformanceFileId(int PerformanceFileId)
+        {
+            string result = string.Empty;
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(GetConnectionString()))
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand("stp_GetLoadByPerformanceFileId", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@PerformanceFileId", PerformanceFileId);
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.HasRows)
+                            {
+                                reader.Read();
+                                result = reader["result"].ToString();
+                            }
+                        }
+                    }
+                    connection.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return result;
+        }
+        internal async Task<string> DeleteLoadTestData(int Id)
+        {
+            string result = string.Empty;
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(GetConnectionString()))
+                {
+                    connection.Open();
+                    using (SqlCommand command = new SqlCommand("stp_DeleteLoad", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.AddWithValue("@Id", Id);
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
                             if (reader.HasRows)

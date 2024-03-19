@@ -6,6 +6,10 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import LoadPanel from './LoadPanel';
+import LocationPanel from './LocationPanel';
+import DataEntryPanel from './TestData';
+import Properties from './Properties';
+import { StyledTypography } from './style';
 
 
 function TabPanel(props) {
@@ -19,8 +23,8 @@ function TabPanel(props) {
       {...other}
     >
       {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
+        <Box sx={{p:1,width:'100%' }}>
+          {children}
         </Box>
       )}
     </div>
@@ -40,7 +44,7 @@ function a11yProps(index) {
   };
 }
 
-export default function DesignTabs() {
+export default function DesignTabs({PerformanceFileId}) {
   const theme = useTheme();
   const [value, setValue] = useState('Load');
   
@@ -54,12 +58,12 @@ export default function DesignTabs() {
   };
 
   return (
-    <Box >
+    <Box style={{width:'100%' }}>
      
       <Tabs
          value={value}
          onChange={handleChange}
-         centered
+         variant="fullWidth"
         sx={{
             '& .MuiTabs-indicator': {
               backgroundColor: 'rgba(101, 77, 247,0)',
@@ -82,24 +86,24 @@ export default function DesignTabs() {
             },
           }}
         >
-          <Tab value="Load" label="Load" />
-          <Tab value="Location" label="Location" />
-          <Tab value="Data Entity" label="Data Entity" />
-          <Tab value="Properties" label="Properties" />
+          <Tab value="Load" label={<StyledTypography>Load</StyledTypography>} />
+          <Tab value="Location" label={<StyledTypography>Location</StyledTypography>} />
+          <Tab value="Data Entity" label={<StyledTypography>Test Data</StyledTypography>} />
+          <Tab value="Properties" label={<StyledTypography>Properties</StyledTypography>} />
           
         </Tabs>
 
         <TabPanel value={value} index={'Load'} dir={theme.direction}>
-       <LoadPanel />
+       <LoadPanel PerformanceFileId={PerformanceFileId}/>
         </TabPanel>
         <TabPanel value={value} index={"Location"} dir={theme.direction}>
-        {"Location"} 
+        <LocationPanel PerformanceFileId={PerformanceFileId}/>
         </TabPanel>
         <TabPanel value={value} index={"Data Entity"} dir={theme.direction}>
-        {"Data Entity"}
+        <DataEntryPanel PerformanceFileId={PerformanceFileId}/>
         </TabPanel>
         <TabPanel value={value} index={"Properties"} dir={theme.direction}>
-        {"Properties"}
+        <Properties PerformanceFileId={PerformanceFileId}/>
         </TabPanel>
         
     </Box>

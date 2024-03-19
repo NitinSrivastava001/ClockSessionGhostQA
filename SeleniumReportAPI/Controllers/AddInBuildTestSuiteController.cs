@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SeleniumReportAPI.DTO_s;
 using SeleniumReportAPI.Helper;
+using SeleniumReportAPI.Models;
 
 namespace SeleniumReportAPI.Controllers
 {
@@ -62,7 +64,6 @@ namespace SeleniumReportAPI.Controllers
                 return StatusCode(500, ex);
             }
         }
-
         [HttpPost("ChangePassword")]
         public async Task<IActionResult> ChangePasswordAsync([FromBody] Dto_ChangePassword model)
         {
@@ -86,6 +87,33 @@ namespace SeleniumReportAPI.Controllers
                         errors = result.Errors
                     });
                 }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        [HttpPost("UploadFile")]
+        public async Task<IActionResult> Upload(string fileBasePath, IFormFile file)
+        {
+            try
+            {
+                if (file == null || file.Length == 0)
+                    return BadRequest("File not selected");
+                // string filePath = @"";
+                var result = await _helper.UploadFiles(file, fileBasePath);
+                string status = string.Empty;
+                string messages = string.Empty;
+                if (result == "Success")
+                    messages = "File Uploaded Successfully";
+                else
+                    messages = "File Uploaded Failed";
+
+                return Ok(new
+                {
+                    status = result,
+                    message = messages
+                });
             }
             catch (Exception ex)
             {

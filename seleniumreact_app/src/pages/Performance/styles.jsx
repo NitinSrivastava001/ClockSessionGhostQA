@@ -1,4 +1,5 @@
-import { makeStyles } from "@material-ui/core";
+import { Typography, makeStyles } from "@material-ui/core";
+import { styled } from "@mui/material/styles";
 
 export const useStyles = makeStyles({
     main: {
@@ -121,6 +122,12 @@ export const useStyles = makeStyles({
             scrollMargin: "20px",
         },
     },
+    inputField: {
+        width:'100%',
+        textAlign:'center',
+        borderRadius:"4px",
+        border:'solid 2px #DADADA'
+    },
 });
 
 export const useStylesTestCase = makeStyles((theme) => ({
@@ -192,3 +199,9 @@ export const useStylesTestCase = makeStyles((theme) => ({
         color: "rgb(56, 56, 56)"
     }
 }));
+
+export const StyledTypography = styled(Typography)(({ theme }) => ({
+    fontFamily: 'Lexend Deca',
+    fontSize:'14px'
+    // Add other styles as needed
+  }));

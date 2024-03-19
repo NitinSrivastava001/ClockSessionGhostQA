@@ -401,6 +401,7 @@ namespace SeleniumReportAPI.Controllers
             return Ok(await _helper.GetExecutionInProgress());
         }
 
+
         /// <summary>
         /// Get User in Json Format
         /// </summary>

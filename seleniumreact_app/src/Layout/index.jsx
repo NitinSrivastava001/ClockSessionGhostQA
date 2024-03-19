@@ -16,7 +16,7 @@ import {
     Popper,
     MenuList,
 } from "@material-ui/core/";
-import { Avatar, Stack } from "@mui/material";
+import { Avatar } from "@mui/material";
 import { ArrowDropDown, ArrowDropUp } from "@material-ui/icons";
 
 // Redux import
@@ -58,7 +58,7 @@ export default function MiniDrawer() {
         setShowMenu(false);
     };
     const isActive =
-        location.pathname === "/" || location.pathname.slice(0, 9) === "/settings";
+        location.pathname === "/" || location.pathname.startsWith("/settings") || location.pathname.startsWith('/testLab');
     return (
         <div className={classes.root}>
             <CssBaseline />
@@ -73,7 +73,7 @@ export default function MiniDrawer() {
                 <Toolbar >
                         <Grid container spacing={2} alignItems="center" style={{minWidth:'450px'}} >
                             <Grid item>
-                                <img src={"/images/GhostQA-Logo.png"} alt="logo" />{" "}
+                                <img src={"/images/Logo_GhostQA.svg"} alt="logo" />{" "}
                             </Grid>
                             <Grid item>
                                 <Link to="/" className={`${classes.linkStyle} ${isActive && classes.activeLink}`} >

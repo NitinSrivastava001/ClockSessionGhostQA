@@ -7,7 +7,6 @@ using Microsoft.OpenApi.Models;
 using SeleniumReportAPI.DBContext;
 using SeleniumReportAPI.Helper;
 using SeleniumReportAPI.Models;
-using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -62,7 +61,7 @@ builder.Services.AddAuthentication(options =>
             ValidateAudience = true,
             ValidAudience = builder.Configuration["JWT:ValidAudience"],
             ValidIssuer = builder.Configuration["JWT:ValidIssuer"],
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Secret"]))
+            IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(builder.Configuration["JWT:Secret"]))
         };
     });
 
@@ -105,7 +104,6 @@ if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
 app.UseRouting();
 
 // Use CORS before any other middleware
@@ -113,6 +111,8 @@ app.UseCors("AllowAll");
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseHttpsRedirection();
 
 app.UseEndpoints(endpoints =>
 {

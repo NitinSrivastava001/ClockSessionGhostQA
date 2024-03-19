@@ -9,7 +9,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<None Remove="SqlScript\stp_AddProjectRootRelation.Sql" />
 		<None Remove="SqlScript\stp_AddUpdateApplication.Sql" />
 		<None Remove="SqlScript\stp_AddUpdateBrowser.Sql" />
 		<None Remove="SqlScript\stp_AddUpdateEnvironment.Sql" />
@@ -17,6 +16,7 @@
 		<None Remove="SqlScript\stp_DeleteApplication.Sql" />
 		<None Remove="SqlScript\stp_DeleteBrowser.Sql" />
 		<None Remove="SqlScript\stp_DeleteEnvironment.Sql" />
+		<None Remove="SqlScript\stp_DeletePerformanceFile.Sql" />
 		<None Remove="SqlScript\stp_DeleteTestSuites.Sql" />
 		<None Remove="SqlScript\stp_GetApplications.sql" />
 		<None Remove="SqlScript\stp_GetBrowsers.Sql" />
@@ -24,6 +24,7 @@
 		<None Remove="SqlScript\stp_GetDashBoardDetails.Sql" />
 		<None Remove="SqlScript\stp_GetEnvironment.sql" />
 		<None Remove="SqlScript\stp_GetEnvironmentById.sql" />
+		<None Remove="SqlScript\stp_GetPerformaceFile.Sql" />
 		<None Remove="SqlScript\stp_GetRunDetails.Sql" />
 		<None Remove="SqlScript\stp_GetRunId.Sql" />
 		<None Remove="SqlScript\stp_GetTestCaseDetails.Sql" />
@@ -34,8 +35,6 @@
 		<None Remove="SqlScript\stp_GetUserDetails.Sql" />
 		<None Remove="SqlScript\stp_InsertBuiltInTestSuiteDetails.Sql" />
 		<None Remove="SqlScript\stp_SaveCustomTestSuiteExecutionData.Sql" />
-		<None Remove="SqlScript\stp_SaveExecutionInProgress.Sql" />
-		<None Remove="SqlScript\stp_UpdateExecutionInProgressFlag.Sql" />
 		<None Remove="SqlScript\stp_UpdateTestStepData.Sql" />
 		<None Remove="SqlScript\stp_UpdateUserProfile.Sql" />
 		<None Remove="SqlScript\stp_UpsertTableData.Sql" />
@@ -43,17 +42,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<EmbeddedResource Include="SqlScript\stp_SaveExecutionInProgress.Sql" />
-		<EmbeddedResource Include="SqlScript\stp_UpdateExecutionInProgressFlag.Sql" />
-		<EmbeddedResource Include="SqlScript\stp_AddProjectRootRelation.Sql" />
 		<EmbeddedResource Include="SqlScript\stp_AddUpdateApplication.Sql" />
 		<EmbeddedResource Include="SqlScript\stp_AddUpdateBrowser.Sql" />
 		<EmbeddedResource Include="SqlScript\stp_AddUpdateEnvironment.Sql" />
 		<EmbeddedResource Include="SqlScript\stp_AddUpdateTestSuites.Sql" />
 		<EmbeddedResource Include="SqlScript\stp_DeleteApplication.Sql" />
 		<EmbeddedResource Include="SqlScript\stp_DeleteBrowser.Sql" />
+		<EmbeddedResource Include="SqlScript\stp_DeletePerformanceFile.Sql" />
 		<EmbeddedResource Include="SqlScript\stp_DeleteEnvironment.Sql" />
 		<EmbeddedResource Include="SqlScript\stp_DeleteTestSuites.Sql" />
+		<EmbeddedResource Include="SqlScript\stp_GetPerformaceFile.Sql" />
 		<EmbeddedResource Include="SqlScript\stp_GetBrowsers.Sql" />
 		<EmbeddedResource Include="SqlScript\stp_GetEnvironmentById.sql" />
 		<EmbeddedResource Include="SqlScript\stp_GetUserDetails.Sql" />
@@ -80,6 +78,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="ExcelDataReader.DataSet" Version="3.6.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.25" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.25" />

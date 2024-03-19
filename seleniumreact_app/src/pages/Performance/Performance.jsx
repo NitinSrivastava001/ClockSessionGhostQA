@@ -43,6 +43,7 @@ export default function Performance() {
 
     fetchData(); // Call the fetchData function when the component mounts
   }, [addTestCase,addNewProject]);
+  
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -86,7 +87,7 @@ export default function Performance() {
             <Card className={classes.card} style={{ paddingBottom: "30px", maxHeight: "78vh" }}>
               <Grid container alignItems="center" className={classes.bodyHeader}>
                 <Grid item xs={6}>
-                  Projects
+                  Workspaces
                 </Grid>
                 <Grid item xs={6} style={{ textAlign: "right" }}>
                   <Button
@@ -99,7 +100,7 @@ export default function Performance() {
                       cursor: "pointer",
                     }}
                   >
-                    <Add /> Add New Project
+                    <Add /> Add New Workspace
                   </Button>
                 </Grid> 
                 <Grid item xs={12}>
@@ -116,9 +117,9 @@ export default function Performance() {
               </Grid>
             </Card>
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={7}>
          
-            {addTestCase!==0 && <TabsPanel />}
+            {addTestCase!==0 && <TabsPanel addTestCase={addTestCase} />}
 
           </Grid>
         </Grid>

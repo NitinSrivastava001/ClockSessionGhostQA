@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 // import SwipeableViews from 'react-swipeable-views';
 import { useTheme } from '@mui/material/styles';
@@ -8,6 +8,7 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Design from './Design';
+import { StyledTypography } from './Component/style';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -41,9 +42,10 @@ function a11yProps(index) {
   };
 }
 
-export default function TabsPanel() {
+export default function TabsPanel({addTestCase}) {
   const theme = useTheme();
   const [value, setValue] = useState('Design');
+  
   
 
   const handleChange = (event, newValue) => {
@@ -70,9 +72,9 @@ export default function TabsPanel() {
            }
          }}
         >
-          <Tab value="Design" label="Design" />
-          <Tab value="Results" label="Results" />
-          <Tab value="Trends" label="Trends" />
+          <Tab value="Design" label={<StyledTypography>Design</StyledTypography>}/>
+          <Tab value="Results" label={<StyledTypography>Results</StyledTypography>} />
+          <Tab value="Trends" label={<StyledTypography>Trends</StyledTypography>} />
         </Tabs>
      
       {/* <SwipeableViews
@@ -81,7 +83,7 @@ export default function TabsPanel() {
         onChangeIndex={handleChangeIndex}
       > */}
         <TabPanel value={value} index={'Design'} dir={theme.direction}>
-        <Design />
+        <Design addTestCase={addTestCase}/>
         </TabPanel>
         <TabPanel value={value} index={"Results"} dir={theme.direction}>
         {"Results"} 

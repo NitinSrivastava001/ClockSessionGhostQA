@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SeleniumReportAPI.DTO_s;
 using SeleniumReportAPI.Helper;
@@ -71,7 +72,7 @@ namespace SeleniumReportAPI.Controllers
         }
 
         /// <summary>
-        ///  Add Test Steps Details
+        ///  Add Test Steps Details 
         /// </summary>
         /// <param TestStepsDetails="TestStepsDetails"></param>
         /// <returns></returns>
@@ -82,7 +83,7 @@ namespace SeleniumReportAPI.Controllers
         }
 
         /// <summary>
-        ///  Update Root Relation
+        ///  Update Root Relation 
         /// </summary>
         /// <param RootId="RootId"></param>
         /// /// <param Name="Name"></param>
@@ -94,7 +95,7 @@ namespace SeleniumReportAPI.Controllers
         }
 
         /// <summary>
-        ///  Get TestCaseDetails By RootId
+        ///  Get TestCaseDetails By RootId 
         /// </summary>
         /// <param RootId="RootId"></param>
         /// <returns></returns>
@@ -105,7 +106,7 @@ namespace SeleniumReportAPI.Controllers
         }
 
         /// <summary>
-        ///  Get TestStepsDetails By TestStepsId
+        ///  Get TestStepsDetails By TestStepsId 
         /// </summary>
         /// <param TestStepsId="TestStepsId"></param>
         /// <returns></returns>
@@ -116,7 +117,7 @@ namespace SeleniumReportAPI.Controllers
         }
 
         /// <summary>
-        ///  Update Root Relation
+        ///  Update Root Relation 
         /// </summary>
         /// <param TestStepsDetails="TestStepsDetails"></param>
         /// <returns></returns>
@@ -138,7 +139,7 @@ namespace SeleniumReportAPI.Controllers
         }
 
         /// <summary>
-        ///  Get Excuted By RootId
+        ///  Get Excuted By RootId 
         /// </summary>
         /// <param RootId="RootId"></param>
         /// <returns></returns>
