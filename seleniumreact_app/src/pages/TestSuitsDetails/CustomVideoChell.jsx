@@ -8,9 +8,9 @@ import { Icon } from "@material-ui/core";
 
 const CustomVideoChell = ({ row }) => {
   const [openModal, setOpenModal] = useState(false);
-  const baseUrl = "https://codearrest.dyndns.org:3005";
+  //const baseUrl = "https://codearrest.dyndns.org:3005";
   const getVideoUrl = (apiPath) => {
-    return `${baseUrl}${apiPath?.replace(/\\/g, '/')}`;
+    return `${apiPath?.replace(/\\/g, '/')}`;
   };
   console.log("row+++video", row);
   console.log("getVideoUrl", getVideoUrl(row.TestCaseVideoURL));

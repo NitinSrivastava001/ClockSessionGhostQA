@@ -7,9 +7,9 @@ import CloseIcon from '@material-ui/icons/Close';
 
 const CustomeTableChell = ({ row }) => {
   const [openModal, setOpenModal] = useState(false);
-  const baseUrl = 'https://codearrest.dyndns.org:3005';
+  //const baseUrl = 'https://codearrest.dyndns.org:3005';
   const getImageUrl = (apiPath) => {
-    return `${baseUrl}${apiPath.replace(/\\/g, '/')}`;
+    return `${apiPath.replace(/\\/g, '/')}`;
   };
 console.log("row",row)
 console.log("getImageUrl",getImageUrl(row.FailureScreenShots))

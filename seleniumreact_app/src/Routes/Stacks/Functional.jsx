@@ -36,7 +36,7 @@ export default function Functional() {
                         Settings
                     </Link>
                 </Grid>
-                <Grid item>
+                {/* <Grid item>
                    
                     <Link
                         to="/testLab"
@@ -45,7 +45,7 @@ export default function Functional() {
                     >
                          Test Lab
                     </Link>
-                </Grid>
+                </Grid> */}
             </Grid>
             
             <div style={{ paddingTop: '30px' }}>

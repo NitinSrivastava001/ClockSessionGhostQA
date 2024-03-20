@@ -80,7 +80,7 @@ export default function MiniDrawer() {
                                     Functional
                                 </Link>
                             </Grid>
-                            <Grid item>
+                            {/* <Grid item>
                                 <Link className={`${classes.linkStyle} ${location.pathname.slice(0, 5) === "/api" && classes.activeLink}`} >
                                     API
                                 </Link>
@@ -89,7 +89,7 @@ export default function MiniDrawer() {
                                 <Link to="/performance" className={`${classes.linkStyle} ${location.pathname === "/performance" && classes.activeLink}`}>
                                     Performance
                                 </Link>
-                            </Grid>
+                            </Grid> */}
                         </Grid>
 
                         <Grid container justifyContent="flex-end" spacing={2}>

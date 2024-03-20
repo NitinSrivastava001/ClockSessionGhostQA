@@ -10,7 +10,6 @@ namespace ClocksessionGhostQAAutomation.TestSuites.LoginSuite.Tests
     [TestFixture]
     public class BaseTest
     {
-        public static string basePath = GhostQAExecutor.Basepath;
         public static string EnvironmentName = GhostQAExecutor.environmentName;
         public IWebDriver driver;
         private static string LoggingPath { get; set; }
@@ -95,19 +94,21 @@ namespace ClocksessionGhostQAAutomation.TestSuites.LoginSuite.Tests
             Screenshot ss = ((ITakesScreenshot)Browser.Driver).GetScreenshot();
             string timestamp = DateTime.Now.ToString("yy-MM-dd hh-mm-ss");
 
-            string screenshotFile = Path.Combine(basePath, fileName + (hasTimeStamp ? timestamp : null) + ".png");
+            string screenshotFile = Path.Combine(VideoRecorder.basePath, fileName + (hasTimeStamp ? timestamp : null) + ".png");
             ss.SaveAsFile(screenshotFile);
             TestContext.AddTestAttachment(screenshotFile, fileName + "Screenshot");
             WriteToLogfile("Error screenshot: " + screenshotFile);
 
-            var FailureSSPath = Path.Combine(basePath, "FailureScreenShots", DateTime.Now.ToString("MMMM_dd_yyyy"));
+            var FailureSSPath = Path.Combine(VideoRecorder.basePath, "FailureScreenShots", DateTime.Now.ToString("MMMM_dd_yyyy"));
             if (!Directory.Exists(FailureSSPath))
             {
                 Directory.CreateDirectory(FailureSSPath);
             }
             var FailureSSImagePath = Path.Combine(FailureSSPath, fileName + (hasTimeStamp ? timestamp : null) + ".png");
             ss.SaveAsFile(FailureSSImagePath);
-            _testSteps.Add(new TestStepColumns { Status = "Failed", Timestamp = DateTime.Now.ToString("dd-MMM-yyyy HH:mm:ss.fffffffzzz"), Details = "Test Failed and here is the screenshot on which test failed", FailureMessage = "Test failed with message " + FailureMessage.ToString().Replace("'", "''"), FailureScreenShots = FailureSSImagePath.StartsWith(basePath) ? @"\\" + FailureSSImagePath.Substring(basePath.Length).ToString() : FailureSSImagePath.ToString() });
+            if (VideoRecorder.basePath.Contains("images"))
+                VideoRecorder.basePath = VideoRecorder.basePath.Substring(0, VideoRecorder.basePath.IndexOf("\\images"));
+            _testSteps.Add(new TestStepColumns { Status = "Failed", Timestamp = DateTime.Now.ToString("dd-MMM-yyyy HH:mm:ss.fffffffzzz"), Details = "Test Failed and here is the screenshot on which test failed", FailureMessage = "Test failed with message " + FailureMessage.ToString().Replace("'", "''"), FailureScreenShots = FailureSSImagePath.StartsWith(VideoRecorder.basePath) ? FailureSSImagePath.Substring(VideoRecorder.basePath.Length).ToString() : FailureSSImagePath.ToString() });
         }
 
         // Helper Methods
@@ -129,7 +130,7 @@ namespace ClocksessionGhostQAAutomation.TestSuites.LoginSuite.Tests
             {
                 string guid = Guid.NewGuid().ToString();
                 string fileName = "Diagnostic_Logs_" + _testData.TestCaseName.ToString() + guid;
-                LoggingPath = Path.Combine(basePath, fileName + ".txt");
+                LoggingPath = Path.Combine(VideoRecorder.basePath, fileName + ".txt");
             }
             if (File.Exists(LoggingPath))
             {
