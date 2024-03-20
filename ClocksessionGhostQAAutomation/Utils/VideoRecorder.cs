@@ -17,12 +17,12 @@ namespace ClocksessionGhostQAAutomation.Utils
                 Directory.CreateDirectory(videoPath);
             }
 
-            outputFile = Path.Combine(videoPath, DateTime.Now.ToString("HH-mm-ss") + ".webm");
+            outputFile = Path.Combine(videoPath, DateTime.Now.ToString("HH-mm-ss") + ".mp4");
 
             string ffmpegPath = @"C:\ffmpeg-6.1.1-essentials_build\bin\ffmpeg.exe";
 
             // Example FFmpeg command to start recording
-            string command = $"-f gdigrab -framerate 30 -i desktop -c:v libx264rgb -preset ultrafast -qp 0 -f webm \"{outputFile}\"";
+            string command = $"-f gdigrab -framerate 30 -i desktop -c:v libx264rgb -preset ultrafast -qp 0 -f mp4 \"{outputFile}\"";
 
             // Start FFmpeg process
             ffmpegProcess = new Process
