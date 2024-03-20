@@ -5,7 +5,7 @@
         private static string _browsername = "chrome";
         private static string _environmentname = "dev";
         private static string _baseurl = "https://mechlintech.dev.clocksession.com/app";
-        private static string _basepath = @"D:\MechlinTech\GhostQA-ClockSession\ClockSessionGhostQA\SeleniumReportAPI\wwwroot\";
+        private static string _basepath = @"C:\inetpub\Published Projects\GhostQA_ClockApp\images\Data\";
         private static string _driverpath = @"D:\MechlinTech\GhostQA-ClockSession\ClockSessionGhostQA\SeleniumReportAPI\wwwroot\Driver";
         private static string _ApiUrl = @"https://localhost:44302/api/AddInBuildTestSuite/SaveInBuiltTestSuites";
         public static string JsonData { get; set; }
