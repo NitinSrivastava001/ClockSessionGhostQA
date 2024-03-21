@@ -64,7 +64,11 @@ namespace ClocksessionGhostQAAutomation.TestSuites.LoginSuite.Tests
 
             _testData.TestRunEndDateTime = DateTime.Now.ToString("dd-MMM-yyyy HH:mm:ss.fffffffzzz");
             _testData.TestCaseSteps = "-";
-            VideoRecorder.StopRecording();
+            //VideoRecorder.StopRecording();
+            VideoRecorder.CreateRecordingfromSC();
+            if (VideoRecorder.basePath.Contains("images"))
+            VideoRecorder.basePath = VideoRecorder.basePath.Substring(0, VideoRecorder.basePath.IndexOf("\\images"));
+            _testData.TestCaseVideoURL = @"\" + (VideoRecorder.outputFile.StartsWith(VideoRecorder.basePath) ? VideoRecorder.outputFile.Substring(VideoRecorder.basePath.Length).ToString().TrimStart('\\') : VideoRecorder.outputFile.ToString());
             Browser.Driver.Dispose();
             _testData.TestSuiteEndDateTime = DateTime.Now.ToString("dd-MMM-yyyy HH:mm:ss.fffffffzzz");
             _testData.TestCaseSteps = JsonConvert.SerializeObject(_testSteps.Where(x => x.Timestamp is not null && (x.Status is not null || x.Status != string.Empty)));

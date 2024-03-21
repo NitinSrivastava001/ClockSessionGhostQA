@@ -1,4 +1,5 @@
 ﻿using ClocksessionGhostQAAutomation.TestSuites.LoginSuite.Tests;
+using OpenQA.Selenium;
 using System.Diagnostics;
 
 namespace ClocksessionGhostQAAutomation.Utils
@@ -9,7 +10,8 @@ namespace ClocksessionGhostQAAutomation.Utils
         public static string basePath = GhostQAExecutor.Basepath;
         public static string videoPath = Path.Combine(GhostQAExecutor.Basepath, "Recordings", DateTime.Now.ToString("dd-MM-yyyy"));
         public static string outputFile = string.Empty;
-
+        public static string screenshotDirectory;
+        
         public static void StartRecording()
         {
             if (!Directory.Exists(videoPath))
@@ -81,6 +83,69 @@ namespace ClocksessionGhostQAAutomation.Utils
             else
             {
                 Console.WriteLine("FFmpeg process is not running or already stopped.");
+            }
+        }
+
+        public static void ScreenShot(string step, string datetime)
+        {
+            
+            string basePath = Path.Combine(VideoRecorder.basePath, "screenshot");
+             screenshotDirectory = Path.Combine(basePath, datetime);
+
+            if (!Directory.Exists(screenshotDirectory))
+            {
+                Directory.CreateDirectory(screenshotDirectory);
+            }
+
+            string screenshotFile = Path.Combine(screenshotDirectory, step + ".png");
+            Screenshot screenShot = ((ITakesScreenshot)Browser.Driver).GetScreenshot();
+            screenShot.SaveAsFile(screenshotFile);
+        }
+
+        public static void CreateRecordingfromSC()
+        {
+            if (!Directory.Exists(videoPath))
+            {
+                Directory.CreateDirectory(videoPath);
+            }
+
+            outputFile = Path.Combine(videoPath, DateTime.Now.ToString("HH-mm-ss") + ".mp4");
+            string[] screenshotFiles = System.IO.Directory.GetFiles(screenshotDirectory, "*.png");
+            string inputFiles = "";
+            foreach (string file in screenshotFiles)
+            {
+                inputFiles += $"-i \"{file}\" ";
+            }
+
+            string ffmpegPath = @"C:\ffmpeg-6.1.1-essentials_build\bin\ffmpeg.exe";
+            string ffmpegArgs = $"-framerate 0.5 -i {screenshotDirectory}//step%d.png -c:v libx264 -r 0.5 -pix_fmt yuv420p {outputFile}";
+
+            ProcessStartInfo startInfo = new ProcessStartInfo
+            {
+                FileName = ffmpegPath,
+                Arguments = ffmpegArgs,
+                UseShellExecute = false,
+                RedirectStandardOutput = true,
+                CreateNoWindow = true
+            };
+            startInfo.RedirectStandardError = true;
+            using (Process process = Process.Start(startInfo))
+            {
+                string standardError = process.StandardError.ReadToEnd();
+                process.WaitForExit();
+                int exitCode = process.ExitCode;
+
+                Console.WriteLine("Standard Error:");
+                Console.WriteLine(standardError);
+
+                if (exitCode == 0)
+                {
+                    Console.WriteLine("Video creation successful.");
+                }
+                else
+                {
+                    Console.WriteLine($"Error creating video. ffmpeg exited with code {exitCode}.");
+                }
             }
         }
     }

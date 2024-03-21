@@ -24,7 +24,7 @@ namespace ClocksessionGhostQAAutomation.Utils
             get { return _driver; }
         }
 
-        public static void Start(BrowserDriver driver = BrowserDriver.Edge, bool isRunHeadless = false, WindowSize windowSize = null)
+        public static void Start(BrowserDriver driver = BrowserDriver.Chrome, bool isRunHeadless = true, WindowSize windowSize = null)
         {
             String driverpath = GhostQAExecutor.Driverpath;
             switch (driver)
@@ -63,6 +63,9 @@ namespace ClocksessionGhostQAAutomation.Utils
                     EdgeOptions edgeOptions = new EdgeOptions();
                     edgeOptions.AddArgument("--allow-incognito");
                     edgeOptions.AddArgument("test-type");
+
+                    if (isRunHeadless)
+                        edgeOptions.AddArguments("headless");
 
                     var timestamp1 = DateTime.Now.ToFileTime();
                     downloadDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "SeleniumDownload", timestamp1.ToString());
