@@ -53,14 +53,35 @@ namespace ClocksessionGhostQAAutomation.Utils
 
         public static void StopRecording()
         {
-            Process[] processes = Process.GetProcessesByName("ffmpeg");
-            ffmpegProcess.Kill();
-            foreach (Process process in processes)
+            if (ffmpegProcess != null && !ffmpegProcess.HasExited)
             {
-                process.Kill();
-                process.WaitForExit();
+                try
+                {
+                    // If StandardInput has been redirected, you can send the 'q' command to FFmpeg to gracefully stop recording
+                    if (ffmpegProcess.StartInfo.RedirectStandardInput)
+                    {
+                        ffmpegProcess.StandardInput.WriteLine("q");
+                    }
+                    else
+                    {
+                        // If StandardInput is not redirected, attempt to close the process gently
+                        ffmpegProcess.CloseMainWindow();
+                        ffmpegProcess.Close();
+                    }
+                    ffmpegProcess.WaitForExit(5000); // Wait for 5 seconds for the process to exit
+                    ffmpegProcess.Kill(); // If the process is still running, kill it (as a last resort)
+
+                    Console.WriteLine("Recording stopped and file finalized.");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error stopping the recording: {ex.Message}");
+                }
             }
-            Console.WriteLine("Recording Stopped...");
+            else
+            {
+                Console.WriteLine("FFmpeg process is not running or already stopped.");
+            }
         }
     }
 }
