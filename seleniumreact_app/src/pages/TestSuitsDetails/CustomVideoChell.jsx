@@ -65,7 +65,7 @@ const CustomVideoChell = ({ row }) => {
             >
               <source
                 src={getVideoUrl(row.TestCaseVideoURL)}
-                type="video/webm"
+                type="video/mp4"
               />
             </video>
             <Box
