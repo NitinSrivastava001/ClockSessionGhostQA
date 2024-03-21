@@ -72,30 +72,35 @@ namespace ClocksessionGhostQAAutomation.TestSuites.LoginSuite.Tests
             _testData.TestSuiteName = "ClockSession_Test";
             _testSteps = new List<TestStepColumns> { new TestStepColumns() };
 
-            VideoRecorder.StartRecording();
+            //VideoRecorder.StartRecording();
             var logInPage = new LoginPage();
-            if (VideoRecorder.basePath.Contains("images"))
-                VideoRecorder.basePath = VideoRecorder.basePath.Substring(0, VideoRecorder.basePath.IndexOf("\\images"));
-            _testData.TestCaseVideoURL = @"\" + (VideoRecorder.outputFile.StartsWith(VideoRecorder.basePath) ? VideoRecorder.outputFile.Substring(VideoRecorder.basePath.Length).ToString().TrimStart('\\') : VideoRecorder.outputFile.ToString());
+            //if (VideoRecorder.basePath.Contains("images"))
+            //    VideoRecorder.basePath = VideoRecorder.basePath.Substring(0, VideoRecorder.basePath.IndexOf("\\images"));
+            //_testData.TestCaseVideoURL = @"\" + (VideoRecorder.outputFile.StartsWith(VideoRecorder.basePath) ? VideoRecorder.outputFile.Substring(VideoRecorder.basePath.Length).ToString().TrimStart('\\') : VideoRecorder.outputFile.ToString());
 
-            var dateTime = DateTime.Now.ToString("dd-MMM-yyyy HH:mm:ss.fffffffzzz");
+            var dateTime = DateTime.Now.ToString("dd-MMM-yyyy_HH-mm-ss");
             _testData.TestRunStartDateTime = dateTime;
 
             _testSteps.Add(new TestStepColumns { Status = "Passed", Timestamp = dateTime, Details = "wait for plage to loader" });
             logInPage.WaitForPageLoad();
+            VideoRecorder.ScreenShot("Step1", dateTime);
 
             _testSteps.Add(new TestStepColumns { Status = "Passed", Timestamp = DateTime.Now.ToString("dd-MMM-yyyy HH:mm:ss.fffffffzzz"), Details = "Click on Login Button" });
             logInPage.ClickonLogin();
+            VideoRecorder.ScreenShot("Step2", dateTime);
 
             _testSteps.Add(new TestStepColumns { Status = "Passed", Timestamp = DateTime.Now.ToString("dd-MMM-yyyy HH:mm:ss.fffffffzzz"), Details = "Enter Email Test" });
             logInPage.SetEmail("Test");
+            VideoRecorder.ScreenShot("Step3", dateTime);
 
             _testSteps.Add(new TestStepColumns { Status = "Passed", Timestamp = DateTime.Now.ToString("dd-MMM-yyyy HH:mm:ss.fffffffzzz"), Details = "Enter passoword test" });
             logInPage.SetPassword("Test");
+            VideoRecorder.ScreenShot("Step4", dateTime);
             try
             {
                 _testSteps.Add(new TestStepColumns { Status = "Passed", Timestamp = DateTime.Now.ToString("dd-MMM-yyyy HH:mm:ss.fffffffzzz"), Details = "Click on Submit button Test" });
                 logInPage.SubmitLogIn();
+                VideoRecorder.ScreenShot("Step1", dateTime);
                 _testData.TestCaseStatus = "Passed";
             }
             catch (Exception ex)
@@ -115,33 +120,39 @@ namespace ClocksessionGhostQAAutomation.TestSuites.LoginSuite.Tests
             _testData.TestSuiteName = "ClockSession_Test";
             _testSteps = new List<TestStepColumns> { new TestStepColumns() };
 
-            VideoRecorder.StartRecording();
+            //VideoRecorder.StartRecording();
             var logInPage = new LoginPage();
-            if (VideoRecorder.basePath.Contains("images"))
-                VideoRecorder.basePath = VideoRecorder.basePath.Substring(0, VideoRecorder.basePath.IndexOf("\\images"));
-            _testData.TestCaseVideoURL = @"\" + (VideoRecorder.outputFile.StartsWith(VideoRecorder.basePath) ? VideoRecorder.outputFile.Substring(VideoRecorder.basePath.Length).ToString().TrimStart('\\') : VideoRecorder.outputFile.ToString());
+            //if (VideoRecorder.basePath.Contains("images"))
+            //    VideoRecorder.basePath = VideoRecorder.basePath.Substring(0, VideoRecorder.basePath.IndexOf("\\images"));
+            //_testData.TestCaseVideoURL = @"\" + (VideoRecorder.outputFile.StartsWith(VideoRecorder.basePath) ? VideoRecorder.outputFile.Substring(VideoRecorder.basePath.Length).ToString().TrimStart('\\') : VideoRecorder.outputFile.ToString());
 
-            var dateTime = DateTime.Now.ToString("dd-MMM-yyyy HH:mm:ss.fffffffzzz");
+            var dateTime = DateTime.Now.ToString("dd-MMM-yyyy_HH-mm-ss");
             _testData.TestRunStartDateTime = dateTime;
 
             _testSteps.Add(new TestStepColumns { Status = "Passed", Timestamp = dateTime, Details = "wait for plage to loader" });
             logInPage.WaitForPageLoad();
+            VideoRecorder.ScreenShot("Step1", dateTime);
 
             _testSteps.Add(new TestStepColumns { Status = "Passed", Timestamp = DateTime.Now.ToString("dd-MMM-yyyy HH:mm:ss.fffffffzzz"), Details = "Click on Login Button" });
             logInPage.ClickonLogin();
+            VideoRecorder.ScreenShot("Step2", dateTime);
 
             _testSteps.Add(new TestStepColumns { Status = "Passed", Timestamp = DateTime.Now.ToString("dd-MMM-yyyy HH:mm:ss.fffffffzzz"), Details = "Enter Email Test" });
             logInPage.SetEmail("nitin.srivastava@mechlintech.com");
+            VideoRecorder.ScreenShot("Step3", dateTime);
 
             _testSteps.Add(new TestStepColumns { Status = "Passed", Timestamp = DateTime.Now.ToString("dd-MMM-yyyy HH:mm:ss.fffffffzzz"), Details = "Enter passoword test" });
             logInPage.SetPassword("Nit@96553");
+            VideoRecorder.ScreenShot("Step4", dateTime);
 
             _testSteps.Add(new TestStepColumns { Status = "Passed", Timestamp = DateTime.Now.ToString("dd-MMM-yyyy HH:mm:ss.fffffffzzz"), Details = "Click on Submit button Test" });
             logInPage.SubmitLogIn();
+            VideoRecorder.ScreenShot("Step5", dateTime);
 
             try
             {
                 Assert.IsTrue(logInPage.LoginSuccess());
+                VideoRecorder.ScreenShot("Step6", dateTime);
                 _testSteps.Add(new TestStepColumns { Status = "Passed", Timestamp = DateTime.Now.ToString("dd-MMM-yyyy HH:mm:ss.fffffffzzz"), Details = "Login Success" });
                 _testData.TestCaseStatus = "Passed";
             }
