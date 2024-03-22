@@ -30,7 +30,7 @@ namespace ClocksessionGhostQAAutomation.TestSuites.LoginSuite.Tests
             //_testData.TestCaseVideoURL = @"\" + (VideoRecorder.outputFile.StartsWith(VideoRecorder.basePath) ? VideoRecorder.outputFile.Substring(VideoRecorder.basePath.Length).ToString().TrimStart('\\') : VideoRecorder.outputFile.ToString());
 
             var dateTime = DateTime.Now.ToString("dd-MMM-yyyy_HH-mm-ss");
-            _testData.TestRunStartDateTime = dateTime;
+            _testData.TestRunStartDateTime = DateTime.Now.ToString("dd-MMM-yyyy HH:mm:ss.fffffffzzz");
 
             _testSteps.Add(new TestStepColumns { Status = "Passed", Timestamp = dateTime, Details = "wait for plage to loader" });
             logInPage.WaitForPageLoad();
@@ -79,7 +79,7 @@ namespace ClocksessionGhostQAAutomation.TestSuites.LoginSuite.Tests
             //_testData.TestCaseVideoURL = @"\" + (VideoRecorder.outputFile.StartsWith(VideoRecorder.basePath) ? VideoRecorder.outputFile.Substring(VideoRecorder.basePath.Length).ToString().TrimStart('\\') : VideoRecorder.outputFile.ToString());
 
             var dateTime = DateTime.Now.ToString("dd-MMM-yyyy_HH-mm-ss");
-            _testData.TestRunStartDateTime = dateTime;
+            _testData.TestRunStartDateTime = DateTime.Now.ToString("dd-MMM-yyyy HH:mm:ss.fffffffzzz");
 
             _testSteps.Add(new TestStepColumns { Status = "Passed", Timestamp = dateTime, Details = "wait for plage to loader" });
             logInPage.WaitForPageLoad();
@@ -127,7 +127,7 @@ namespace ClocksessionGhostQAAutomation.TestSuites.LoginSuite.Tests
             //_testData.TestCaseVideoURL = @"\" + (VideoRecorder.outputFile.StartsWith(VideoRecorder.basePath) ? VideoRecorder.outputFile.Substring(VideoRecorder.basePath.Length).ToString().TrimStart('\\') : VideoRecorder.outputFile.ToString());
 
             var dateTime = DateTime.Now.ToString("dd-MMM-yyyy_HH-mm-ss");
-            _testData.TestRunStartDateTime = dateTime;
+            _testData.TestRunStartDateTime = DateTime.Now.ToString("dd-MMM-yyyy HH:mm:ss.fffffffzzz");
 
             _testSteps.Add(new TestStepColumns { Status = "Passed", Timestamp = dateTime, Details = "wait for plage to loader" });
             logInPage.WaitForPageLoad();
